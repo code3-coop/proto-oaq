@@ -1,1 +1,30 @@
-h1 hello from world
+.navbar
+  .navbar-inner
+    .container
+      .pull-left
+        p.navbar-text
+          span.badge.badge-warning 4
+          |  messages non-lus
+          
+      .pull-right
+        ul.nav
+          li
+            p.navbar-text
+              i.icon-user.icon-white
+              |  Mme. Example
+          li
+            a(href="#")
+              i.icon-off.icon-white
+              |  Quitter
+.container-fluid
+  .row-fluid
+    .span2
+      img(src="/img/logo_oaq.png")
+    .span10 
+      form.form-search
+        .input-append
+          input.input-large.search-query(type="text") 
+          button.btn(type="submit"): i.icon-search
+
+
+      
