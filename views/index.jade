@@ -16,6 +16,7 @@
             a(href="#")
               i.icon-off.icon-white
               |  Quitter
+
 .container-fluid
   .row-fluid
     .span2
@@ -25,6 +26,44 @@
         .input-append
           input.input-large.search-query(type="text") 
           button.btn(type="submit"): i.icon-search
-
-
-      
+  .row-fluid(style="margin-top:2em")
+    .span3
+      form
+        select
+          option Admission
+          option Inspection professionnelle
+          option Formation continue
+      ul.nav.nav-list
+        li.nav-header Requêtes
+      ul#req-tree
+        li Requête A
+          ul
+            li Dossier 1
+            li Dossier 2
+            li Dossier 3
+        li Requête B
+          ul
+            li Dossier 1
+            li Dossier 2
+            li Dossier 3
+        li Requête C
+          ul
+            li Dossier 1
+            li Dossier 2
+            li Dossier 3
+      ul.nav.nav-list
+        li.nav-header Dossiers ouverts
+      ul#dossiers-tree
+        li Dossier 1
+        li Dossier 2
+        li Dossier 3
+    .span9
+      .tabbable
+        ul.nav.nav-tabs
+          li.active: a(href="#tab1", data-toggle="tab") Section 1
+          li: a(href="#tab2", data-toggle="tab") Section 2
+        .tab-content
+          #tab1.tab-pane.active
+            p BLAH 1
+          #tab2.tab-pane
+            p BLAH 2
