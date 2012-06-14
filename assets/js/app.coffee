@@ -4,4 +4,3 @@
 
 $ ->
   ($ '#req-tree').kendoTreeView()
-  ($ '#dossiers-tree').kendoTreeView()

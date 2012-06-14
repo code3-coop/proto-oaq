@@ -2,6 +2,8 @@
 @import '../../public/css/kendo.common.min.css'
 @import '../../public/css/kendo.metro.min.css'
 
+@import 'nib'
+
 .navbar-inner
   border-radius 0
 form.form-search
@@ -12,3 +14,33 @@ form.form-search
   button
     height 2.8em
 
+.x-profile-pic
+  width 69px
+  height 74px
+  background url(/img/author-overlay-bg.png) no-repeat
+  img
+    margin 6px 0 0 6px
+
+.x-info-sheet
+  .x-name
+    font-weight bold
+    font-size 1.1em
+    margin-bottom 10px
+
+.x-notes
+  background linear-gradient(top, #f8f284, #f5f186)
+  padding 10px 20px
+  font 0.9em 'Permanent Marker', cursive;
+  z-index 1
+  box-shadow 1px 5px 8px grey
+  .x-auth
+    text-align right
+    &:before
+      content "- "
+
+.x-top-row
+  margin-bottom 2em
+
+.x-nav-menu
+  select
+    width 100%

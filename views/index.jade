@@ -18,7 +18,7 @@
               |  Quitter
 
 .container-fluid
-  .row-fluid
+  .row-fluid.x-top-row
     .span2
       img(src="/img/logo_oaq.png")
     .span10 
@@ -26,44 +26,112 @@
         .input-append
           input.input-large.search-query(type="text") 
           button.btn(type="submit"): i.icon-search
-  .row-fluid(style="margin-top:2em")
-    .span3
+  .row-fluid
+    .span3.well.x-nav-menu
       form
         select
-          option Admission
-          option Inspection professionnelle
+          option Tableau de l'Ordre
           option Formation continue
+          option Inspection professionnelle
       ul.nav.nav-list
-        li.nav-header Requêtes
+        li.nav-header Requêtes prédéfinies
       ul#req-tree
         li Requête A
           ul
-            li Dossier 1
-            li Dossier 2
-            li Dossier 3
+            li: a(href="")
+              i.icon-user
+              |&nbsp; M. Pierre Deschamps
+            li: a(href="")
+              i.icon-home
+              |&nbsp; Vitruve inc.
+            li: a(href="")
+              i.icon-user
+              |&nbsp; Mme Denise Laroche
         li Requête B
           ul
-            li Dossier 1
-            li Dossier 2
-            li Dossier 3
+            li: a(href="")
+              i.icon-user
+              |&nbsp; M. Pierre Deschamps
+            li: a(href="")
+              i.icon-home
+              |&nbsp; Vitruve inc.
+            li: a(href="")
+              i.icon-user
+              |&nbsp; Mme Denise Lar
         li Requête C
           ul
-            li Dossier 1
-            li Dossier 2
-            li Dossier 3
+            li: a(href="")
+              i.icon-user
+              |&nbsp; M. Pierre Deschamps
+            li: a(href="")
+              i.icon-home
+              |&nbsp; Vitruve inc.
+            li: a(href="")
+              i.icon-user
+              |&nbsp; Mme Denise Lar
       ul.nav.nav-list
+        li.divider
         li.nav-header Dossiers ouverts
-      ul#dossiers-tree
-        li Dossier 1
-        li Dossier 2
-        li Dossier 3
+        li: a(href="")
+          i.icon-user
+          | M. Pierre Deschamps
+        li: a(href="")
+          i.icon-home
+          | Vitruve inc.
+        li: a(href="")
+          i.icon-user
+          | Mme Denise Laroche
+        li: a(href="")
+          i.icon-user
+          | M. Jean Lafleur
+        li: a(href="")
+          i.icon-user
+          | M. Jacques Duchesne
     .span9
-      .tabbable
-        ul.nav.nav-tabs
-          li.active: a(href="#tab1", data-toggle="tab") Section 1
-          li: a(href="#tab2", data-toggle="tab") Section 2
-        .tab-content
-          #tab1.tab-pane.active
-            p BLAH 1
-          #tab2.tab-pane
-            p BLAH 2
+      .container-fluid
+        .row-fluid
+          .span1
+            img(src="/img/flechegauche.png")
+          .span10
+            .container-fluid
+              .row-fluid
+                .span2
+                  .x-profile-pic
+                    img(src="http://www.gravatar.com/avatar/76f0d24ad87d65debc82aed00720f1ce?s=57")
+                .span4
+                  .x-info-sheet
+                    .x-name M. Pierre Deschamps
+                    .x-address 307-353 rue Saint-Nicolas
+                    .x-address Montréal (Québec)  H1Y 2P1
+                .span6
+                  .x-notes
+                    .x-date 2012-06-14
+                    .x-body Architecti est scientia pluribus disciplinis et variis eruditionibus ornata, cuius iudicio probantur omnia quae ab ceteris artibus perficiuntur opera. Ea nascitur ex fabrica et ratiocinatione. Fabrica est continuata ac trita usus meditatio.
+                    .x-auth Vitruve
+          .span1
+            img(src="/img/flechedroite.png")
+        .row-fluid
+          .span12
+            .tabbable.tabs-left
+              ul.nav.nav-tabs
+                li.active: a(href="#tab1", data-toggle="tab") Informations générales
+                li: a(href="#tab2", data-toggle="tab") Adresses
+              .tab-content
+                #tab1.tab-pane.active
+                  form.form-horizontal
+                    fieldset
+                      legend Informations générales
+                      .control-group
+                        label.control-label(for="nom") Nom
+                        .controls
+                          input#nom.input-xlarge(type="text")
+                      .control-group
+                        label.control-label(for="prenom") Prénom
+                        .controls
+                          input#prenom.input-xlarge(type="text")
+                      .control-group
+                        label.control-label(for="dob") Date de naissance
+                        .controls
+                          input#dob.input-xlarge(type="text")
+                #tab2.tab-pane
+                  p BLAH 2
