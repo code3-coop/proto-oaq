@@ -71,7 +71,7 @@
               |&nbsp; Mme Denise Lar
       ul.nav.nav-list
         li.divider
-        li.nav-header Recherches
+        li.nav-header Recherches adhoc
       ul.nav.nav-list
         li.divider
         li.nav-header Dossiers ouverts
@@ -94,10 +94,16 @@
       .container-fluid
         .row-fluid
           .span1
-            img(src="/img/flechegauche.png")
+            button.btn#x-profile-nav-prev
+              i.icon-chevron-left
           #x-profile-info.span10
+            #x-profile-info-wrapper
+              #x-profile-info-prev
+              #x-profile-info-curr
+              #x-profile-info-next
           .span1
-            img(src="/img/flechedroite.png")
+            button.btn#x-profile-nav-next
+              i.icon-chevron-right
         .row-fluid
           #x-current-context.span12
 
