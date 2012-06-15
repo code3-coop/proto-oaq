@@ -16,6 +16,7 @@ module.exports = (app) ->
         sexe: 1 # ISO 5218
         notes: [
             dateCreation: '2012-06-14T12:12:00' # ISO 8601
+            priorite: 1
             contenu: 'Architecti est scientia pluribus disciplinis et variis eruditionibus ornata, cuius iudicio probantur omnia quae ab ceteris artibus perficiuntur opera. Ea nascitur ex fabrica et ratiocinatione. Fabrica est continuata ac trita usus meditatio.'
             auteur: 'Vitruve'
         ]
