@@ -14,6 +14,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #= require ../vendor/md5
+#= require ../vendor/moment
+#= require ../vendor/moment-fr
+
+moment.lang 'fr'
 
 @OAQ = window.OAQ ? {}
 
@@ -29,4 +33,7 @@ class @OAQ.ProfileView extends Backbone.View
       dossier: @model.toJSON()
       imgUrl: "http://www.gravatar.com/avatar/#{CryptoJS.MD5(adresse.courriel)}?s=57&d=#{window.encodeURIComponent(window.location+'/img/avatar.png')}"
       adresse: adresse
-      note: note
+      note:
+        dateCreation: moment(note.dateCreation).fromNow()
+        contenu: note.contenu
+        auteur: note.auteur
