@@ -2,16 +2,20 @@
 #= require vendor/bootstrap
 #= require vendor/underscore
 #= require vendor/backbone
+#= require vendor/handlebars
 #= require vendor/kendo
 
 #= require models/Dossier
+#= require views/ProfileView
 
 $ ->
   ($ '#req-tree').kendoTreeView()
 
   dossier = new OAQ.Dossier _id:123
 
-  dossier.on 'change', ->
-    console.log dossier.get 'nomFamille'
+  new OAQ.ProfileView
+    model: dossier
+    el: ($ '#x-profile-info')
+
 
   dossier.fetch()

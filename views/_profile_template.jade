@@ -1,0 +1,15 @@
+script#profile-info-template(type="text/x-handlebars-template")
+  .container-fluid
+    .row-fluid
+      .span6
+        .x-profile-pic
+          img(src="{{imgUrl}}")
+        .x-info-sheet
+          .x-name {{dossier.prefixe}} {{dossier.prenom}} {{dossier.nomFamille}}
+          .x-address {{adresse.unite}}-{{adresse.rue}}
+          .x-address {{adresse.ville}} ({{adresse.province}})  {{adresse.codePostal}}
+      .span6
+        .x-notes
+          .x-date {{note.dateCreation}}
+          .x-body {{note.contenu}}
+          .x-auth {{note.auteur}}

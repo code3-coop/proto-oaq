@@ -95,21 +95,7 @@
         .row-fluid
           .span1
             img(src="/img/flechegauche.png")
-          .span10
-            .container-fluid
-              .row-fluid
-                .span6
-                  .x-profile-pic
-                    img(src="http://www.gravatar.com/avatar/76f0d24ad87d65debc82aed00720f1ce?s=57")
-                  .x-info-sheet
-                    .x-name M. Pierre Deschamps
-                    .x-address 307-353 rue Saint-Nicolas
-                    .x-address Montréal (Québec)  H1Y 2P1
-                .span6
-                  .x-notes
-                    .x-date 2012-06-14
-                    .x-body Architecti est scientia pluribus disciplinis et variis eruditionibus ornata, cuius iudicio probantur omnia quae ab ceteris artibus perficiuntur opera. Ea nascitur ex fabrica et ratiocinatione. Fabrica est continuata ac trita usus meditatio.
-                    .x-auth Vitruve
+          #x-profile-info.span10
           .span1
             img(src="/img/flechedroite.png")
         .row-fluid
@@ -123,7 +109,6 @@
                 #tab1.tab-pane.active
                   form.form-horizontal
                     fieldset
-                      legend Informations générales
                       .control-group
                         label.control-label(for="nom") Nom
                         .controls
@@ -140,3 +125,5 @@
                   p BLAH 2
                 #tab3.tab-pane
                   p BLAH 3
+
+!= partial('profile_template')

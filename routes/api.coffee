@@ -30,7 +30,7 @@ module.exports = (app) ->
             province: 'Québec'
             codePostal: 'H1Y 2P1'
             pays: 'Canada'
-            courriel: 'francois.x.guillemette@code3.com'
+            courriel: 'francois.x.guillemette@code3.ca'
             numeroTelephone: '514-775-7061'
           ,
             type: 'Personnelle'
@@ -42,7 +42,7 @@ module.exports = (app) ->
             province: 'Québec'
             codePostal: 'H1Y 2P1'
             pays: 'Canada'
-            courriel: 'francois.x.guillemette@code3.com'
+            courriel: 'francois.x.guillemette@gmail.com'
             numeroTelephone: '514-775-7061'
         ]
 
