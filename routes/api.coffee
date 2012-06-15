@@ -6,7 +6,7 @@ module.exports = (app) ->
       res.json
         _id: parseInt req.params.id, 10
         _version: 1
-        nomFamille: 'Deschamps'
+        nomFamille: "Deschamps (#{req.params.id})"
         nomFamilleNaissance: ''
         prenom: 'Pierre'
         secondPrenom: ''

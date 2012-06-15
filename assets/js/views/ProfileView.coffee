@@ -24,13 +24,15 @@ moment.lang 'fr'
 class @OAQ.ProfileView extends Backbone.View
   initialize: ->
     @template = Handlebars.compile ($ '#profile-info-template').html()
-    @model.on 'change', @render
+    @model.on 'change:currDossier', @render
+    @model.get('currDossier').on 'change', @render
 
   render: =>
-    adresse = @model.get('adresses')[0]
-    note = @model.get('notes')[0]
+    dossier = @model.get('currDossier')
+    adresse = dossier.get('adresses')[0]
+    note = dossier.get('notes')[0]
     ($ @el).html @template
-      dossier: @model.toJSON()
+      dossier: dossier.toJSON()
       imgUrl: "http://www.gravatar.com/avatar/#{CryptoJS.MD5(adresse.courriel)}?s=57&d=#{window.encodeURIComponent(window.location+'/img/avatar.png')}"
       adresse: adresse
       note:

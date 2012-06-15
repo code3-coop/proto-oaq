@@ -13,13 +13,31 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#= require Dossier
+
 @OAQ = window.OAQ ? {}
 
-class @OAQ.ContextView extends Backbone.View
-  initialize: ->
-    @tableauOrdreTemplate = Handlebars.compile ($ '#tableau-ordre-template').html()
-    @model.on 'change:currDossier', @render
-    @model.get('currDossier').on 'change', @render
+class @OAQ.Application extends Backbone.Model
+  # Will hold :
+  # - prev, curr and next Dossiers
+  # - Searches (predefined and ad hoc)
+  # - Currently opened files
+  # - Current result set
 
-  render: =>
-    ($ @el).html @tableauOrdreTemplate @model.get('currDossier').toJSON()
+  initialize: ->
+    @set 'results', ((Math.floor((Math.random()*100)+1)) for i in [0...100])
+    @index = 0
+
+  fetchAll: =>
+    dossier = new OAQ.Dossier _id:@get('results')[@index]
+    dossier.fetch
+      success: =>
+        @set 'currDossier', dossier
+
+  cycleToNext: =>
+    @index += 1 if @index < 100
+    @fetchAll()
+  cycleToPrev: =>
+    @index -= 1 if @index > 0
+    @fetchAll()
+
