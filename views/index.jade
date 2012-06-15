@@ -99,31 +99,7 @@
           .span1
             img(src="/img/flechedroite.png")
         .row-fluid
-          .span12
-            .tabbable
-              ul.nav.nav-tabs
-                li.active: a(href="#tab1", data-toggle="tab") Informations générales
-                li: a(href="#tab2", data-toggle="tab") Adresses
-                li: a(href="#tab3", data-toggle="tab") Notes
-              .tab-content
-                #tab1.tab-pane.active
-                  form.form-horizontal
-                    fieldset
-                      .control-group
-                        label.control-label(for="nom") Nom
-                        .controls
-                          input#nom.input-xlarge(type="text")
-                      .control-group
-                        label.control-label(for="prenom") Prénom
-                        .controls
-                          input#prenom.input-xlarge(type="text")
-                      .control-group
-                        label.control-label(for="dob") Date de naissance
-                        .controls
-                          input#dob.input-xlarge(type="text")
-                #tab2.tab-pane
-                  p BLAH 2
-                #tab3.tab-pane
-                  p BLAH 3
+          #x-current-context.span12
 
 != partial('profile_template')
+!= partial('tableau_ordre_template')

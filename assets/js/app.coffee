@@ -7,6 +7,7 @@
 
 #= require models/Dossier
 #= require views/ProfileView
+#= require views/ContextView
 
 $ ->
   ($ '#req-tree').kendoTreeView()
@@ -17,5 +18,8 @@ $ ->
     model: dossier
     el: ($ '#x-profile-info')
 
+  new OAQ.ContextView
+    model: dossier
+    el: ($ '#x-current-context')
 
   dossier.fetch()

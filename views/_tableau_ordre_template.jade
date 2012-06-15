@@ -1,0 +1,26 @@
+script#tableau-ordre-template(type="text/x-handlebars-template")
+  .tabbable
+    ul.nav.nav-tabs
+      li.active: a(href="#tab1", data-toggle="tab") Informations générales
+      li: a(href="#tab2", data-toggle="tab") Adresses
+      li: a(href="#tab3", data-toggle="tab") Notes
+    .tab-content
+      #tab1.tab-pane.active
+        form.form-horizontal
+          fieldset
+            .control-group
+              label.control-label(for="nom") Nom
+              .controls
+                input#nom.input-xlarge(type="text", value="{{nomFamille}}")
+            .control-group
+              label.control-label(for="prenom") Prénom
+              .controls
+                input#prenom.input-xlarge(type="text", value="{{prenom}}")
+            .control-group
+              label.control-label(for="dob") Date de naissance
+              .controls
+                input#dob.input-xlarge(type="text", value="{{dateNaissance}}")
+      #tab2.tab-pane
+        h4 Adresses
+      #tab3.tab-pane
+        h4 Notes
