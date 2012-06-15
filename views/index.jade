@@ -27,16 +27,16 @@
           input.input-large.search-query(type="text") 
           button.btn(type="submit"): i.icon-search
   .row-fluid
-    .span3.well.x-nav-menu
+    .span2.well.x-nav-menu
       form
         select
           option Tableau de l'Ordre
           option Formation continue
           option Inspection professionnelle
       ul.nav.nav-list
-        li.nav-header Requêtes prédéfinies
+        li.nav-header Recherches prédéfinies
       ul#req-tree
-        li Requête A
+        li Recherche A
           ul
             li: a(href="")
               i.icon-user
@@ -47,7 +47,7 @@
             li: a(href="")
               i.icon-user
               |&nbsp; Mme Denise Laroche
-        li Requête B
+        li Recherche B
           ul
             li: a(href="")
               i.icon-user
@@ -58,7 +58,7 @@
             li: a(href="")
               i.icon-user
               |&nbsp; Mme Denise Lar
-        li Requête C
+        li Recherche C
           ul
             li: a(href="")
               i.icon-user
@@ -69,6 +69,9 @@
             li: a(href="")
               i.icon-user
               |&nbsp; Mme Denise Lar
+      ul.nav.nav-list
+        li.divider
+        li.nav-header Recherches
       ul.nav.nav-list
         li.divider
         li.nav-header Dossiers ouverts
@@ -87,7 +90,7 @@
         li: a(href="")
           i.icon-user
           | M. Jacques Duchesne
-    .span9
+    .span10
       .container-fluid
         .row-fluid
           .span1
@@ -111,10 +114,11 @@
             img(src="/img/flechedroite.png")
         .row-fluid
           .span12
-            .tabbable.tabs-left
+            .tabbable
               ul.nav.nav-tabs
                 li.active: a(href="#tab1", data-toggle="tab") Informations générales
                 li: a(href="#tab2", data-toggle="tab") Adresses
+                li: a(href="#tab3", data-toggle="tab") Notes
               .tab-content
                 #tab1.tab-pane.active
                   form.form-horizontal
@@ -134,3 +138,5 @@
                           input#dob.input-xlarge(type="text")
                 #tab2.tab-pane
                   p BLAH 2
+                #tab3.tab-pane
+                  p BLAH 3
