@@ -4,9 +4,14 @@
 #= require underscore
 #= require backbone
 
-#= require_tree models
+#= require models/Dossier
 
 $ ->
   ($ '#req-tree').kendoTreeView()
 
-  currentFile = new OAQ.Dossier({_id:123}).fetch()
+  dossier = new OAQ.Dossier({_id:123})
+
+  dossier.on 'change', ->
+    console.log dossier.get('nomFamille')
+
+  dossier.fetch()
