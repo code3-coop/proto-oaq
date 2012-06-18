@@ -3,10 +3,10 @@ module.exports = (app) ->
   app.namespace '/dossiers', ->
 
     app.get ':id', (req, res) ->
-      res.json
+     res.json
         _id: parseInt req.params.id, 10
         _version: 1
-        nomFamille: 'Deschamps'
+        nomFamille: "Deschamps (#{req.params.id})"
         nomFamilleNaissance: ''
         prenom: 'Pierre'
         secondPrenom: ''
@@ -46,4 +46,26 @@ module.exports = (app) ->
             numeroTelephone: '514-775-7061'
         ]
 
+  app.namespace '/queries', ->
+
+    # Returns the list of saved queries
+    app.get ':name', (req, res) ->
+      res.json [
+          _id: 1
+          label: 'Tous les dossiers'
+        ,
+          _id: 2
+          label: 'Cotisation non-payée'
+      ]
+
+    # Finds a saved query by it id and executes it.
+    app.get ':id/results', (req, res) ->
+      res.json [
+          _id: 1
+          label: 'M. Pierre Deschamps'
+        ,
+          _id: 2
+          label: 'Dre. Rose Dubois'
+      ]
+        
 

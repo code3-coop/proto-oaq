@@ -13,15 +13,34 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#= require ../vendor/jquery
 #= require ../vendor/backbone
+#= require Dossier
+#= require ../collections/ResultSet
 
 @OAQ = window.OAQ ? {}
 
-class @OAQ.ContextView extends Backbone.View
-  initialize: ->
-    @tableauOrdreTemplate = Handlebars.compile ($ '#tableau-ordre-template').html()
-    @model.on 'change:currentDossier', @render
+class @OAQ.Query extends Backbone.Model
+  idAttribute: '_id'
 
-  render: =>
-    ($ @el).html @tableauOrdreTemplate @model.get('currentDossier').toJSON()
+  defaults:
+    index: 0
+    label: ''
+
+  initialize: ->
+    @set 'results', new OAQ.ResultSet(queryId:@id)
+
+  refresh: (callbacks={}) ->
+    (@get 'results').fetch(callbacks)
+
+  current: ->
+    (@get 'results').at(@get 'index')
+
+  next: ->
+    index = @get 'index'
+    @set('index', index + 1) if index < (@get 'results').size() - 1
+    @current()
+
+  prev: ->
+    index = @get 'index'
+    @set('index', index - 1) if index > 0
+    @current()
