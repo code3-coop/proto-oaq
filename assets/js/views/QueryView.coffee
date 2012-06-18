@@ -29,10 +29,14 @@ class @OAQ.QueryView extends Backbone.View
         options.fn(each)).join('')
 
     @template = Handlebars.compile ($ '#queries-template').html()
+
     @model.get('predefinedQueries').on 'all', @render
+    @model.on 'change:currentQuery', @render
 
   events:
     'click a[href^=/dossiers/]': 'onDossierClick'
+    'click :button:contains("consulter")': 'onConsulterClick'
+    'click :button:contains("actualiser")': 'onActualiserClick'
 
   render: =>
     context = {queries:[]}
@@ -50,3 +54,10 @@ class @OAQ.QueryView extends Backbone.View
     index = ($ e.target).data 'index'
     @model.get('currentQuery').at(index).fetch
       success: @model.setCurrentDossier
+
+  onConsulterClick: (e) =>
+    id = ($ e.target).data 'queryid'
+    @model.set 'currentQuery', @model.get('predefinedQueries').get(id)
+
+  onActualiserClick: (e) =>
+    (@model.get 'currentQuery').refresh()

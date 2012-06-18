@@ -10,7 +10,7 @@ script#queries-template(type="text/x-handlebars-template")
         &nbsp;{{label}}
       {{/eachWithIndex}}
       {{else}}
-      button.btn.btn-mini.pull-right consulter
+      button.btn.btn-mini.pull-right(data-queryid="{{query._id}}") consulter
       {{/if}}
     li.divider
     {{/each}}
