@@ -19,6 +19,7 @@
 #= require ../vendor/md5
 #= require ../vendor/moment
 #= require ../vendor/moment-fr
+#= require ../vendor/dotdotdot
 
 moment.lang 'fr'
 
@@ -32,12 +33,16 @@ class @OAQ.ProfileView extends Backbone.View
   render: =>
     dossier = @model.get('currentDossier')
     adresse = dossier.get('adresses')[0]
-    note = dossier.get('notes')[0]
-    ($ @el).html @template
+    note = dossier.get('notes')?[0]
+    context =
       dossier: dossier.toJSON()
       imgUrl: "http://www.gravatar.com/avatar/#{CryptoJS.MD5(adresse.courriel)}?s=57&d=#{window.encodeURIComponent(window.location+'/img/avatar.png')}"
       adresse: adresse
-      note:
+    if note
+      context.note =
         dateCreation: moment(note.dateCreation).fromNow()
         contenu: note.contenu
         auteur: note.auteur
+    ($ @el).html @template context
+    @$('.x-body').dotdotdot
+      height: 60

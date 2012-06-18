@@ -9,7 +9,10 @@ script#profile-info-template(type="text/x-handlebars-template")
           .x-address {{adresse.unite}}-{{adresse.rue}}
           .x-address {{adresse.ville}} ({{adresse.province}})  {{adresse.codePostal}}
       .span6
+        {{#if note}}
         .x-notes
           .x-date {{note.dateCreation}}
-          .x-body {{note.contenu}}
+          .x-body-wrapper
+            .x-body {{note.contenu}}
           .x-auth {{note.auteur}}
+        {{/if}}
