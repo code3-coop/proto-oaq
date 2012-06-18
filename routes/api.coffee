@@ -14,6 +14,7 @@ module.exports = (app, db) ->
             ville: 'Montréal'
             province: 'Québec'
             codePostal: 'H1Y 2P1'
+            courriel: 'francois.x.guillemette@code3.ca'
           ]
           res.json obj
 
@@ -23,7 +24,7 @@ module.exports = (app, db) ->
     app.get ':name', (req, res) ->
       res.json [
           _id: 1
-          label: 'Nouveau dossiers'
+          label: 'Nouveaux dossiers'
         ,
           _id: 2
           label: 'Cotisation non-payée'
