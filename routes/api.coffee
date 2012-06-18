@@ -66,6 +66,9 @@ module.exports = (app) ->
         ,
           _id: 2
           label: 'Dre. Rose Dubois'
+        ,
+          _id: 3
+          label: 'M. Jean De la Montagne'
       ]
         
 

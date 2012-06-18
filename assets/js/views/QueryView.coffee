@@ -17,12 +17,22 @@
 #= require ../vendor/backbone
 #= require ../vendor/handlebars
 
+#= require ../models/Dossier
+
 @OAQ = window.OAQ ? {}
 
 class @OAQ.QueryView extends Backbone.View
   initialize: ->
+    Handlebars.registerHelper 'eachWithIndex', (items, options) ->
+      (for each, index in items
+        each.__index = index
+        options.fn(each)).join('')
+
     @template = Handlebars.compile ($ '#queries-template').html()
     @model.get('predefinedQueries').on 'all', @render
+
+  events:
+    'click a[href^=/dossiers/]': 'onDossierClick'
 
   render: =>
     context = {queries:[]}
@@ -33,5 +43,10 @@ class @OAQ.QueryView extends Backbone.View
         query: q.toJSON()
         results: (q.get 'results').toJSON()
 
-    console.log context
     ($ @el).html @template context
+
+  onDossierClick: (e) =>
+    e.preventDefault()
+    index = ($ e.target).data 'index'
+    @model.get('currentQuery').at(index).fetch
+      success: @model.setCurrentDossier

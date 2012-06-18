@@ -47,3 +47,8 @@ class @OAQ.Query extends Backbone.Model
     index = @get 'index'
     (@set 'index', index - 1) if index > 0
     @curr()
+
+  at: (index) ->
+    if 0 <= index < (@get 'results').size()
+      @set 'index', index
+      @curr()
