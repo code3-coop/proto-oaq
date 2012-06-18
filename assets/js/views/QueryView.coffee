@@ -13,37 +13,25 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#= require ../vendor/jquery
 #= require ../vendor/backbone
-#= require Dossier
-#= require ../collections/ResultSet
+#= require ../vendor/handlebars
 
 @OAQ = window.OAQ ? {}
 
-class @OAQ.Query extends Backbone.Model
-  idAttribute: '_id'
-
-  defaults:
-    index: 0
-    label: ''
-
+class @OAQ.QueryView extends Backbone.View
   initialize: ->
-    @set 'results', new OAQ.ResultSet(queryId:@id)
+    @template = Handlebars.compile ($ '#queries-template').html()
+    @model.get('predefinedQueries').on 'all', @render
 
-  refresh: (callbacks={}) ->
-    (@get 'results').fetch
-      success: =>
-        callbacks.success?()
-        @collection.trigger 'change'
+  render: =>
+    context = {queries:[]}
+    currentQuery = @model.get('currentQuery')
+    @model.get('predefinedQueries').each (q) ->
+      context.queries.push
+        current: q.id is currentQuery.id
+        query: q.toJSON()
+        results: (q.get 'results').toJSON()
 
-  curr: ->
-    (@get 'results').at(@get 'index')
-
-  next: ->
-    index = @get 'index'
-    (@set 'index', index + 1) if index < (@get 'results').size() - 1
-    @curr()
-
-  prev: ->
-    index = @get 'index'
-    (@set 'index', index - 1) if index > 0
-    @curr()
+    console.log context
+    ($ @el).html @template context

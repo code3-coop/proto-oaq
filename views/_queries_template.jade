@@ -1,0 +1,16 @@
+script#queries-template(type="text/x-handlebars-template")
+  ul.nav.nav-list
+    {{#each queries}}
+    li.nav-header {{query.label}}
+      {{#if current}}
+      button.btn.btn-mini.pull-right actualiser
+      {{#each results}}
+      li: a(href="/dossiers/{{_id}}")
+        i.icon-user
+        &nbsp;{{label}}
+      {{/each}}
+      {{else}}
+      button.btn.btn-mini.pull-right consulter
+      {{/if}}
+    li.divider
+    {{/each}}
