@@ -4,7 +4,8 @@ require('coffee-script');
  * Module dependencies.
  */
 
-var express = require('express');
+var express = require('express'),
+    mongo = require('mongodb');
 
 require('express-namespace');
 
@@ -30,11 +31,15 @@ app.configure('production', function(){
   app.use(express.errorHandler());
 });
 
-// Routes
+var db = new mongo.Db('oaqdemo', new mongo.Server('localhost', 27017, {}), {native_parser:false});
 
-require('./routes/index')(app);
-require('./routes/api')(app);
+db.open(function (err, db) {
 
-app.listen(3000, function(){
-  console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+  // Routes
+  require('./routes/index')(app);
+  require('./routes/api')(app, db);
+
+  app.listen(3000, function(){
+    console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+  });
 });
