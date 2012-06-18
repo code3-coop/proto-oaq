@@ -52,7 +52,7 @@ module.exports = (app) ->
     app.get ':name', (req, res) ->
       res.json [
           _id: 1
-          label: 'Tous les dossiers'
+          label: 'Nouveau dossiers'
         ,
           _id: 2
           label: 'Cotisation non-payée'
