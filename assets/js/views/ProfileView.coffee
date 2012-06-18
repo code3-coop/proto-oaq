@@ -13,6 +13,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#= require ../vendor/jquery
+#= require ../vendor/backbone
+#= require ../vendor/handlebars
 #= require ../vendor/md5
 #= require ../vendor/moment
 #= require ../vendor/moment-fr
@@ -24,11 +27,10 @@ moment.lang 'fr'
 class @OAQ.ProfileView extends Backbone.View
   initialize: ->
     @template = Handlebars.compile ($ '#profile-info-template').html()
-    @model.on 'change:currDossier', @render
-    @model.get('currDossier').on 'change', @render
+    @model.on 'change:currentDossier', @render
 
   render: =>
-    dossier = @model.get('currDossier')
+    dossier = @model.get('currentDossier')
     adresse = dossier.get('adresses')[0]
     note = dossier.get('notes')[0]
     ($ @el).html @template

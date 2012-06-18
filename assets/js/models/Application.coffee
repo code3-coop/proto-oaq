@@ -14,30 +14,38 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #= require Dossier
+#= require Query
+#= require ../collections/Queries
+#= require ../vendor/backbone
 
 @OAQ = window.OAQ ? {}
 
 class @OAQ.Application extends Backbone.Model
-  # Will hold :
-  # - prev, curr and next Dossiers
-  # - Searches (predefined and ad hoc)
-  # - Currently opened files
-  # - Current result set
+  defaults:
+    predefinedQueries: new OAQ.Queries(name:'predef')
+    currentQuery: new OAQ.Query()
+    currentDossier: new OAQ.Dossier()
 
   initialize: ->
-    @set 'results', ((Math.floor((Math.random()*100)+1)) for i in [0...100])
-    @index = 0
+    (@get 'predefinedQueries').fetch
+      success: @initCurrentQuery
 
-  fetchAll: =>
-    dossier = new OAQ.Dossier _id:@get('results')[@index]
-    dossier.fetch
-      success: =>
-        @set 'currDossier', dossier
+  initCurrentQuery: =>
+    @set 'currentQuery', (@get 'predefinedQueries').first()
+    (@get 'currentQuery').refresh
+      success: @initCurrentDossier
 
-  cycleToNext: =>
-    @index += 1 if @index < 100
-    @fetchAll()
-  cycleToPrev: =>
-    @index -= 1 if @index > 0
-    @fetchAll()
+  initCurrentDossier: =>
+    (@get 'currentQuery').current().fetch
+      success: @setCurrentDossier
 
+  moveToNextDossier: ->
+    (@get 'currentQuery').next().fetch
+      success: @setCurrentDossier
+
+  moveToPrevDossier: ->
+    (@get 'currentQuery').prev().fetch
+      success: @setCurrentDossier
+
+  setCurrentDossier: (dossier) =>
+    @set 'currentDossier', dossier

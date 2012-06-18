@@ -13,6 +13,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#= require ../vendor/backbone
+
 @OAQ = window.OAQ ? {}
 
 class @OAQ.Dossier extends Backbone.Model
