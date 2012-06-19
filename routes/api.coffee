@@ -3,9 +3,9 @@ mongo = require 'mongodb'
 module.exports = (app, db) ->
 
   app.namespace '/dossiers', ->
-    getDossier = require('./dossiers').getDossier
+    dossiers = require('./dossiers')
     app.get ':id', (req, res) ->
-      getDossier(req.params.id, res, db)
+      dossiers.getDossier(req.params.id, res, db)
 
   app.namespace '/queries', ->
 
