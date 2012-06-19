@@ -1,8 +1,7 @@
-{ Server, Db } = require "mongodb"
-server = new Server "localhost", 27017, {auto_reconnect:true}
-db = new Db "oaqdemo", server
+mongo = require('mongodb')
 
-module.exports.getDossier = (numero, response) ->
+exports.getDossier = (numero, response, app) ->
+  db = new mongo.Db(app.set('mongoDB'), new mongo.Server( app.set('mongoHost'), app.set('mongoPort'), {}), {native_parser:false})
   critere =
     "numero" : "#{numero}"
 
