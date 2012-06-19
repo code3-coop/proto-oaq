@@ -26,17 +26,17 @@ class @OAQ.Application extends Backbone.Model
     currentQuery: new OAQ.Query()
     currentDossier: new OAQ.Dossier()
 
-  initialize: ->
+  load: ->
     (@get 'predefinedQueries').fetch
       success: @initCurrentQuery
 
   initCurrentQuery: =>
     @set 'currentQuery', (@get 'predefinedQueries').first()
-    (@get 'currentQuery').refresh
-      success: @initCurrentDossier
+    (@get 'currentQuery').refresh success: @initCurrentDossier
+    each.refresh() for each in (@get 'predefinedQueries').rest()
 
   initCurrentDossier: =>
-    (@get 'currentQuery').current().fetch
+    (@get 'currentQuery').curr().fetch
       success: @setCurrentDossier
 
   moveToNextDossier: ->

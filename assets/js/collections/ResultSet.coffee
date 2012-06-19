@@ -20,7 +20,9 @@
 
 class @OAQ.ResultSet extends Backbone.Collection
   model: OAQ.Dossier
+
   comparator: (dossier) -> dossier.id
+
   url: -> "/queries/#{@options.queryId}/results"
 
   initialize: (@options) ->

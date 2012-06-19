@@ -27,50 +27,13 @@
           input.input-large.search-query(type="text") 
           button.btn(type="submit"): i.icon-search
   .row-fluid
-    .span2.well.x-nav-menu
-      form
-        select
-          option Tableau de l'Ordre
-          option Formation continue
-          option Inspection professionnelle
+    .span3.well.x-nav-menu
+      form: select
+        option Tableau de l'Ordre
+        option Formation continue
+        option Inspection professionnelle
+      #x-query-tree
       ul.nav.nav-list
-        li.nav-header Recherches prédéfinies
-      ul#req-tree
-        li Recherche A
-          ul
-            li: a(href="")
-              i.icon-user
-              |&nbsp; M. Pierre Deschamps
-            li: a(href="")
-              i.icon-home
-              |&nbsp; Vitruve inc.
-            li: a(href="")
-              i.icon-user
-              |&nbsp; Mme Denise Laroche
-        li Recherche B
-          ul
-            li: a(href="")
-              i.icon-user
-              |&nbsp; M. Pierre Deschamps
-            li: a(href="")
-              i.icon-home
-              |&nbsp; Vitruve inc.
-            li: a(href="")
-              i.icon-user
-              |&nbsp; Mme Denise Lar
-        li Recherche C
-          ul
-            li: a(href="")
-              i.icon-user
-              |&nbsp; M. Pierre Deschamps
-            li: a(href="")
-              i.icon-home
-              |&nbsp; Vitruve inc.
-            li: a(href="")
-              i.icon-user
-              |&nbsp; Mme Denise Lar
-      ul.nav.nav-list
-        li.divider
         li.nav-header Recherches ad hoc
       ul.nav.nav-list
         li.divider
@@ -90,7 +53,7 @@
         li: a(href="")
           i.icon-user
           | M. Jacques Duchesne
-    .span10
+    .span9
       .container-fluid
         .row-fluid
           .span1
@@ -105,3 +68,4 @@
 
 != partial('profile_template')
 != partial('tableau_ordre_template')
+!= partial('queries_template')

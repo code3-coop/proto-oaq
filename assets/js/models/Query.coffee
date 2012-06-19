@@ -30,17 +30,25 @@ class @OAQ.Query extends Backbone.Model
     @set 'results', new OAQ.ResultSet(queryId:@id)
 
   refresh: (callbacks={}) ->
-    (@get 'results').fetch(callbacks)
+    (@get 'results').fetch
+      success: =>
+        callbacks.success?()
+        @collection.trigger 'change'
 
-  current: ->
+  curr: ->
     (@get 'results').at(@get 'index')
 
   next: ->
     index = @get 'index'
-    @set('index', index + 1) if index < (@get 'results').size() - 1
-    @current()
+    (@set 'index', index + 1) if index < (@get 'results').size() - 1
+    @curr()
 
   prev: ->
     index = @get 'index'
-    @set('index', index - 1) if index > 0
-    @current()
+    (@set 'index', index - 1) if index > 0
+    @curr()
+
+  at: (index) ->
+    if 0 <= index < (@get 'results').size()
+      @set 'index', index
+      @curr()

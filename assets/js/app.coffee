@@ -1,14 +1,18 @@
 #= require vendor/jquery
 #= require vendor/bootstrap
-#= require vendor/kendo
+
 #= require models/Application
+
+#= require views/QueryView
 #= require views/ProfileView
 #= require views/ContextView
 
 $ ->
-  ($ '#req-tree').kendoTreeView()
+  application = OAQ.app = new OAQ.Application()
 
-  application = new OAQ.Application()
+  new OAQ.QueryView
+    model: application
+    el: ($ '#x-query-tree')
 
   new OAQ.ProfileView
     model: application
@@ -23,3 +27,5 @@ $ ->
 
   ($ '#x-profile-nav-prev').on 'click', ->
     application.moveToPrevDossier()
+
+  application.load()
