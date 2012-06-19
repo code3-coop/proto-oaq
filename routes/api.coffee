@@ -3,7 +3,7 @@ module.exports = (app) ->
   app.namespace '/dossiers', ->
     getDossier = require('./dossiers').getDossier
     app.get ':id', (req, res) ->
-      res.json getDossier(req.params.id)
+      getDossier(req.params.id, res)
 
   app.namespace '/queries', ->
 
