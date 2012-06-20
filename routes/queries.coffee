@@ -13,7 +13,7 @@ exports.getQueries = (name, response, db)->
 parseUser = (resultat)->
   {
     _id: resultat._id
-    label: "M. #{resultat.prefixe} #{resultat.prenom} #{resultat.nomFamille}"
+    label: "#{resultat.prefixe} #{resultat.prenom} #{resultat.nomFamille}"
   }
 
 exports.getResults = (id, response, db)->
