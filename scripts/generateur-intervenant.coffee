@@ -139,6 +139,7 @@ pattern = /[\w\u00C0-\u00FF]+/g
 exports.genererIntervenant = ->
     intervenant = {}
     intervenant.numero = genererNumero()
+    intervenant._id = intervenant.numero
     intervenant.nomFamille = auHasardDans noms
     intervenant.prenom = auHasardDans prenoms
     intervenant.secondPrenom = if auHasard() then auHasardDans prenoms else ""
