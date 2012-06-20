@@ -148,7 +148,7 @@ exports.genererIntervenant = ->
     intervenant.nomFamilleNaissance = if auHasard() then auHasardDans noms else ""
     intervenant.sexe = auHasardDans sexes
     intervenant.dateNaissance = genererDate()
-    intervenant.adresses = genererAdresses
+    intervenant.adresses = genererAdresses()
     intervenant.notes = if auHasard() then genererSerie 1, 3, genererNotes
     intervenant._keywords = genererKeywords intervenant
     intervenant
@@ -183,9 +183,8 @@ genererNumero = ->
     genererChaineNumerique 9
 
 genererAdresses = ->
-  [
+  adresses = [
     {
-      id: genererChaineNumerique 8
       type: "Affaires"
       mentionComplementaire: "Une mention complémentaire"
       rue: "#{ genererChaineNumerique 4 } #{ auHasardDans rues }"
@@ -199,7 +198,6 @@ genererAdresses = ->
       numeroTelephone : genererNumeroTelephone()
     },
     {
-      id: genererChaineNumerique 8
       type: "Personnelle"
       mentionComplementaire: "Une mention complémentaire"
       rue: "#{ genererChaineNumerique 4 } #{ auHasardDans rues }"
@@ -213,6 +211,7 @@ genererAdresses = ->
       numeroTelephone : genererNumeroTelephone()
     }
   ]
+  adresses
 
 genererSerie = ( min, max, fonction ) ->
     nombreOccurence = randomInt( max - min + 1 ) + min

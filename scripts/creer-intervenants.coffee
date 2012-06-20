@@ -1,6 +1,6 @@
 { prologue } = require './lmlib'
 
-prologue "Création et insertion dans la base de données de 5000 intervenants"
+prologue "Création et insertion dans la base de données de 500 intervenants"
 
 { genererIntervenant } = require "./generateur-intervenant"
 
@@ -20,7 +20,7 @@ db.open (err, db) ->
     # Insertion de plusieurs intervenants en lot
     db.collection "intervenants", {safe:true}, (err, collection) ->
         if err then throw err
-        lot = genererLot 5000
+        lot = genererLot 500
         collection.insert lot, {safe:true}, (err, result) ->
             if err then throw err
             db.close()
