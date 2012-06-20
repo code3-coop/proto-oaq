@@ -1,6 +1,6 @@
-exports.getDossier = (numero, response, db) ->
+exports.getDossier = (id, response, db) ->
   critere =
-    "numero" : "#{numero}"
+    "_id" : "#{id}"
 
   contenu =
     "_keywords": 0
