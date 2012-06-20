@@ -12,7 +12,6 @@ script#profile-info-template(type="text/x-handlebars-template")
         {{#if note}}
         .x-notes
           .x-date {{note.dateCreation}}
-          .x-body-wrapper
-            .x-body {{note.contenu}}
+          .x-body {{note.contenu}}
           .x-auth {{note.auteur}}
         {{/if}}

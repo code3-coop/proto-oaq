@@ -16,5 +16,3 @@ module.exports = (app, db) ->
     # Finds a saved query by it id and executes it.
     app.get ':id/results', (req, res) ->
       queries.getResults(req.params.id, res, db)
-        
-
