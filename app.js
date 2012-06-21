@@ -48,7 +48,9 @@ var serverOptions = {
 var server = new mongo.Server(app.set('mongoHost'), app.set('mongoPort'), serverOptions);
 var dbManager = new mongo.Db(app.set('mongoDB'), server);
 dbManager.open(function (error, db) {
-  require('./routes/api')(app,db);
+  dossiers = require('./routes/dossiers')(db);
+  queries = require('./routes/queries')(db);
+  require('./routes/api')(app, dossiers, queries);
 
   app.listen(3000, function(){
     console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
