@@ -23,10 +23,12 @@
 
 class @OAQ.QueryView extends Backbone.View
   initialize: ->
-    Handlebars.registerHelper 'eachWithIndex', (items, options) ->
-      (for each, index in items
-        each.__index = index
-        options.fn(each)).join('')
+    Handlebars.registerHelper 'eachWithIndex', (collection, options) =>
+      currentIndex = @model.get('currentQuery').get('index')
+      out = ""
+      collection.each (each, index) ->
+        out += options.fn _.extend each.toJSON(), {index, currentIdx: index is currentIndex}
+      out
 
     @template = Handlebars.compile ($ '#queries-template').html()
 
@@ -45,7 +47,7 @@ class @OAQ.QueryView extends Backbone.View
       context.queries.push
         current: q.id is currentQuery.id
         query: q.toJSON()
-        results: (q.get 'results').toJSON()
+        results: (q.get 'results')
 
     ($ @el).html @template context
 
