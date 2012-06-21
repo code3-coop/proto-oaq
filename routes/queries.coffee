@@ -1,15 +1,22 @@
 module.exports = (db) ->
-    getQueries: (name, response) ->
-      response.json [
-          _id: 1
-          label: 'Nouveaux dossiers'
-        ,
-          _id: 2
-          label: 'Cotisation non-payée'
-        ,
-          _id: 3
-          label: 'Non-assuré'
-      ]
+
+    savedQueries = [
+        _id: 1
+        label: 'Nouveaux dossiers'
+      ,
+        _id: 2
+        label: 'Cotisation non-payée'
+      ,
+        _id: 3
+        label: 'Non-assuré'
+    ]
+
+    getQueries: (response) ->
+      response.json savedQueries
+
+    getQuery: (id, response) ->
+      for each in savedQueries when id is each._id
+        response.json each
     
     getResults:(id, response) ->
       resultats = []
