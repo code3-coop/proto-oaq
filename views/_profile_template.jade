@@ -6,7 +6,11 @@ script#profile-info-template(type="text/x-handlebars-template")
           img(src="{{imgUrl}}")
         .x-info-sheet
           .x-name {{dossier.prefixe}} {{dossier.prenom}} {{dossier.nomFamille}}
+          {{#if adresse.unite}}
           .x-address {{adresse.unite}}-{{adresse.rue}}
+          {{else}}
+          .x-address {{adresse.rue}}
+          {{/if}}
           .x-address {{adresse.ville}} ({{adresse.province}})  {{adresse.codePostal}}
       .span6
         {{#if note}}
