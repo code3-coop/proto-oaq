@@ -1,3 +1,5 @@
+_ = require '../assets/js/vendor/underscore'
+
 module.exports = (db) ->
   getDossier: (id, response) ->
     critere =
@@ -13,4 +15,7 @@ module.exports = (db) ->
       stream.on "data", (resultat) ->
         dossier = resultat
       stream.on "end", ->
-        response.json dossier
+        if _.isEmpty(dossier)
+          response.send 404
+        else
+          response.json dossier
