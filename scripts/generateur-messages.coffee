@@ -71,7 +71,6 @@ pattern = /[\w\u00C0-\u00FF]+/g
 
 exports.genererMessage = ->
     message = {}
-    message._id = genererNumero()
     message.destination = genererNumero()
     message.isRead = "false"
     message.author = "#{auHasardDans prenoms} #{auHasardDans noms}"
