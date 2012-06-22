@@ -2,6 +2,7 @@
 #= require vendor/bootstrap
 
 #= require models/Application
+#= require routers/Router
 
 #= require views/QueryView
 #= require views/ProfileView
@@ -28,4 +29,6 @@ $ ->
   ($ '#x-profile-nav-prev').on 'click', ->
     application.moveToPrevDossier()
 
-  application.load()
+  application.load ->
+    OAQ.router = new OAQ.Router(application)
+    Backbone.history.start()

@@ -21,34 +21,34 @@
 
 class @OAQ.Query extends Backbone.Model
   idAttribute: '_id'
-
-  defaults:
-    index: 0
-    label: ''
+  urlRoot: '/queries'
 
   initialize: ->
     @set 'results', new OAQ.ResultSet(queryId:@id)
 
-  refresh: (callbacks={}) ->
+  execute: (callbacks={}) ->
     (@get 'results').fetch
-      success: =>
-        callbacks.success?()
-        @collection.trigger 'change'
+      success: (results) =>
+        callbacks.success?(results)
 
-  curr: ->
-    (@get 'results').at(@get 'index')
+  next: (id, fn) ->
+    # finds the index of the currentDossier in `results`. If it isn't the first
+    # item, navigate the router to the previous dossier in `results`.
+    index = @_indexOf id
+    size = (@get 'results').size()
+    if -1 < index < (size - 1)
+      fn (@get 'results').at(index + 1)
+      
+  prev: (id, fn) ->
+    # finds the index of the currentDossier in `results`. If it isn't the last
+    # item, navigate the router to the next dossier in `results`.
+    index = @_indexOf id
+    if index > 0
+      fn (@get 'results').at(index - 1)
 
-  next: ->
-    index = @get 'index'
-    (@set 'index', index + 1) if index < (@get 'results').size() - 1
-    @curr()
-
-  prev: ->
-    index = @get 'index'
-    (@set 'index', index - 1) if index > 0
-    @curr()
-
-  at: (index) ->
-    if 0 <= index < (@get 'results').size()
-      @set 'index', index
-      @curr()
+  _indexOf: (id) ->
+    indexFound = -1
+    found = (@get 'results').find (test, index) ->
+      indexFound = index
+      test.id is id
+    if found then indexFound else -1

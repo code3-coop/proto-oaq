@@ -23,17 +23,9 @@
 
 class @OAQ.QueryView extends Backbone.View
   initialize: ->
-    Handlebars.registerHelper 'eachWithIndex', (collection, options) =>
-      currentIndex = @model.get('currentQuery').get('index')
-      out = ""
-      collection.each (each, index) ->
-        out += options.fn _.extend each.toJSON(), {index, currentIdx: index is currentIndex}
-      out
-
     @template = Handlebars.compile ($ '#queries-template').html()
-
-    @model.get('predefinedQueries').on 'all', @render
-    @model.on 'change:currentQuery', @render
+    @model.get('savedQueries').on 'all', @render
+    @model.on 'change:currentQuery change:currentDossier', @render
 
   events:
     'click a[href^=/dossiers/]': 'onDossierClick'
@@ -43,23 +35,30 @@ class @OAQ.QueryView extends Backbone.View
   render: =>
     context = {queries:[]}
     currentQuery = @model.get('currentQuery')
-    @model.get('predefinedQueries').each (q) ->
-      context.queries.push
-        current: q.id is currentQuery.id
-        query: q.toJSON()
-        results: (q.get 'results')
+    currentDossier = @model.get('currentDossier')
+
+    @model.get('savedQueries').each (eachQuery) ->
+      queryView = {info: eachQuery.toJSON(), results:[]}
+      queryView.isCurrentQuery = if currentQuery then (currentQuery.id is eachQuery.id) else no
+      if queryView.isCurrentQuery
+        currentQuery.get('results').each (eachResult) ->
+          resultView = {info: eachResult.toJSON()}
+          resultView.isCurrentDossier = if currentDossier then currentDossier.id is eachResult.id else no
+          queryView.results.push(resultView)
+      context.queries.push(queryView)
 
     ($ @el).html @template context
 
   onDossierClick: (e) =>
     e.preventDefault()
-    index = ($ e.target).data 'index'
-    @model.get('currentQuery').at(index).fetch
-      success: @model.setCurrentDossier
+    id = ($ e.target).data 'dossierid'
+    queryId = @model.get('currentQuery').id
+    OAQ.router.navigate("recherches/#{queryId}/dossiers/#{id}", {trigger:yes})
 
   onConsulterClick: (e) =>
     id = ($ e.target).data 'queryid'
-    @model.set 'currentQuery', @model.get('predefinedQueries').get(id)
+    OAQ.router.navigate("recherches/#{id}", {trigger:yes})
 
   onActualiserClick: (e) =>
-    (@model.get 'currentQuery').refresh()
+    (@model.get 'currentQuery').execute
+      success: @render

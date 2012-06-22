@@ -19,7 +19,7 @@
 
 class @OAQ.Dossier extends Backbone.Model
   idAttribute: '_id'
-  urlRoot: '/dossiers' # while we're not using Backbone.Collections
+  urlRoot: '/dossiers'
 
   @find: (id, fn) ->
     new Dossier(_id:id).fetch

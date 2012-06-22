@@ -21,7 +21,7 @@
 class @OAQ.ResultSet extends Backbone.Collection
   model: OAQ.Dossier
 
-  comparator: (dossier) -> dossier.id
+  # comparator: (dossier) -> dossier.nomFamille
 
   url: -> "/queries/#{@options.queryId}/results"
 

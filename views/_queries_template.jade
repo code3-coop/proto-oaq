@@ -1,25 +1,25 @@
 script#queries-template(type="text/x-handlebars-template")
   ul.nav.nav-list
     {{#each queries}}
-    li.nav-header {{query.label}}
+    li.nav-header {{info.label}}
 
-      {{#if current}}
+      {{#if isCurrentQuery}}
       button.btn.btn-mini.pull-right actualiser
 
-      {{#eachWithIndex results}}
-      {{#if currentIdx}}
-      li.active: a(href="/dossiers/{{_id}}", data-index="{{index}}")
+      {{#each results}}
+      {{#if isCurrentDossier}}
+      li.active: a(href="/dossiers/{{info._id}}", data-dossierid="{{info._id}}")
         i.icon-user.icon-white
-        | &nbsp;{{label}}
+        | &nbsp;{{info.label}}
       {{else}}
-      li: a(href="/dossiers/{{_id}}", data-index="{{index}}")
+      li: a(href="/dossiers/{{info._id}}", data-dossierid="{{info._id}}")
         i.icon-user
-        | &nbsp;{{label}}
+        | &nbsp;{{info.label}}
       {{/if}}
-      {{/eachWithIndex}}
+      {{/each}}
 
       {{else}}
-      button.btn.btn-mini.pull-right(data-queryid="{{query._id}}") consulter
+      button.btn.btn-mini.pull-right(data-queryid="{{info._id}}") consulter
 
       {{/if}}
     li.divider

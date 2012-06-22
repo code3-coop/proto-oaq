@@ -22,30 +22,15 @@
 
 class @OAQ.Application extends Backbone.Model
   defaults:
-    predefinedQueries: new OAQ.Queries(name:'predef')
-    currentQuery: new OAQ.Query()
-    currentDossier: new OAQ.Dossier()
+    savedQueries: new OAQ.Queries()
 
-  load: ->
-    (@get 'predefinedQueries').fetch
-      success: @initCurrentQuery
+  load: (success) ->
+    (@get 'savedQueries').fetch {success}
 
-  initCurrentQuery: =>
-    @set 'currentQuery', (@get 'predefinedQueries').first()
-    (@get 'currentQuery').refresh success: @initCurrentDossier
-    each.refresh() for each in (@get 'predefinedQueries').rest()
+  moveToNextDossier: -> @_moveTo 'next'
+  moveToPrevDossier: -> @_moveTo 'prev'
 
-  initCurrentDossier: =>
-    (@get 'currentQuery').curr().fetch
-      success: @setCurrentDossier
+  _moveTo: (direction) ->
+    (@get 'currentQuery')[direction] (@get 'currentDossier').id, (dossier) =>
+      OAQ.router.navigate "/recherches/#{(@get 'currentQuery').id}/dossiers/#{dossier.id}", {trigger:yes}
 
-  moveToNextDossier: ->
-    (@get 'currentQuery').next().fetch
-      success: @setCurrentDossier
-
-  moveToPrevDossier: ->
-    (@get 'currentQuery').prev().fetch
-      success: @setCurrentDossier
-
-  setCurrentDossier: (dossier) =>
-    @set 'currentDossier', dossier

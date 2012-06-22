@@ -19,6 +19,4 @@
 
 class @OAQ.Queries extends Backbone.Collection
   model: OAQ.Query
-  url: -> "/queries/#{@options.name}"
-
-  initialize: (@options) ->
+  url: -> "/queries"
