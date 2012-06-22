@@ -33,6 +33,7 @@ class @OAQ.Router extends Backbone.Router
       success: (found) =>
         # @application.set 'currentQuery', null
         @application.set 'currentDossier', found
+        @application.set 'currentQuery', null
       error: =>
         @navigate('/', {trigger:yes})
 
