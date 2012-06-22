@@ -10,6 +10,10 @@ module.exports = (app, dossiers, queries) ->
     # Returns the list of saved queries
     app.get '/', (req, res) ->
       queries.getQueries(res)
+    
+    # Free-text query
+    app.get 'free/:queryParams', (req, res) ->
+      queries.getTextQueryResults(req.params.queryParams, res)
 
     # Finds a saved query by it's id
     app.get ':id', (req, res) ->

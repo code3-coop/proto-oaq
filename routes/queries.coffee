@@ -18,6 +18,31 @@ module.exports = (db) ->
       for each in savedQueries when id is each._id
         response.json each
       response.send 404
+
+    extractKeywords = (keywords) ->
+      #fix up method later to clean up params
+      keywords.split " "
+
+    getTextQueryResults: (keywords, response) ->
+      critere = {
+        "_keywords" : {
+          "$all": extractKeywords keywords
+        }
+      }
+
+      contenu =
+        "_keywords": 0
+      
+      #using streaming still for this part, might want to return partial results sometime
+      db.collection "intervenants", {safe:true}, (err, collection) ->
+        resultats = []
+        if err then throw err
+        stream = collection.find(critere,contenu).streamRecords()
+        stream.on "data", (resultat) ->
+          resultats.push resultat
+        stream.on "end", ->
+          response.json resultats
+      
     
     getResults:(id, response) ->
       resultats = []
