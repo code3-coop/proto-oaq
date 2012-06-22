@@ -1,6 +1,6 @@
 mongo = require 'mongodb'
 
-module.exports = (app, dossiers, queries) ->
+module.exports = (app, dossiers, queries, messages) ->
 
   app.namespace '/dossiers', ->
     app.get ':id', (req, res) ->
@@ -18,3 +18,16 @@ module.exports = (app, dossiers, queries) ->
     # Finds a saved query by it's id and executes it.
     app.get ':id/results', (req, res) ->
       queries.getResults(req.params.id, res)
+
+  app.namespace '/messages', ->
+    app.get '/', (req, res) ->
+      messages.getMessages(res)
+
+    app.get ':id', (req, res) ->
+      messages.getMessage(req.params.id, res)
+
+    app.delete ':id', (req, res) ->
+      messages.deleteMessage(req.params.id, res)
+
+    app.post '/', (req, res) ->
+      messages.postMessage(req, res)
