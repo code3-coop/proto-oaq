@@ -18,7 +18,19 @@ module.exports = (db) ->
     response.send 501
 
   postMessage: (request, response) ->
-    response.send 501
+    message = {}
+    message.subject = request.param('subject')
+    message.author = request.param('author')
+    message.dateSent = new Date().getTime()
+    message.body = request.param('body')
+    message.destination = request.param('destination')
+    #message._keywords = parseKeywords message
+    message.isRead = "false"
+    db.collection "messages", {safe:true}, (err, collection) ->
+      if err then throw err
+      collection.insert message, {safe:true}, (err, result) ->
+        if err then throw err
+    response.send 200
 
   getMessages: (response) ->
     response.json savedMessages
@@ -31,8 +43,6 @@ module.exports = (db) ->
       response.json resultat
     else
       id = parseInt(id,10)
-      console.log "in else with id #{id}"
       for each in savedMessages when id is each._id
-        console.log "match found"
         response.json each
       response.send 404
