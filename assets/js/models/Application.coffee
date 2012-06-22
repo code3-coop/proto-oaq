@@ -22,10 +22,7 @@
 
 class @OAQ.Application extends Backbone.Model
   defaults:
-    savedQueries: new OAQ.Queries()
-
-  load: (success) ->
-    (@get 'savedQueries').fetch {success}
+    savedQueries: new OAQ.Queries(OAQ._savedQueries)
 
   moveToNextDossier: -> @_moveTo 'next'
   moveToPrevDossier: -> @_moveTo 'prev'

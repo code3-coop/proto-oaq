@@ -66,6 +66,11 @@
         .row-fluid
           #x-current-context.span12
 
+script(type="text/javascript")
+  var _ref;
+  this.OAQ = (_ref = window.OAQ) != null ? _ref : {};
+  OAQ._savedQueries = !{JSON.stringify(savedQueries)};
+
 != partial('profile_template')
 != partial('tableau_ordre_template')
 != partial('queries_template')

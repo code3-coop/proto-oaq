@@ -8,6 +8,8 @@
 #= require views/ProfileView
 #= require views/ContextView
 
+@OAQ = window.OAQ ? {}
+
 $ ->
   application = OAQ.app = new OAQ.Application()
 
@@ -29,6 +31,5 @@ $ ->
   ($ '#x-profile-nav-prev').on 'click', ->
     application.moveToPrevDossier()
 
-  application.load ->
-    OAQ.router = new OAQ.Router(application)
-    Backbone.history.start()
+  OAQ.router = new OAQ.Router(application)
+  Backbone.history.start()

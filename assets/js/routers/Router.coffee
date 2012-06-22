@@ -31,7 +31,6 @@ class @OAQ.Router extends Backbone.Router
     # Dossier to the one found (if any).
     new OAQ.Dossier(_id:id).fetch
       success: (found) =>
-        # @application.set 'currentQuery', null
         @application.set 'currentDossier', found
         @application.set 'currentQuery', null
       error: =>
@@ -53,6 +52,9 @@ class @OAQ.Router extends Backbone.Router
                 @navigate('/', {trigger:yes})
       error: =>
         @navigate('/', {trigger:yes})
+
+  findDossiersByCriteria: (criteria) ->
+
 
   findDossierInQuery: (queryId, dossierId) ->
     # Finds the Dossier by it's id and sets it as the currentDossier. Then, it

@@ -24,8 +24,8 @@
 class @OAQ.QueryView extends Backbone.View
   initialize: ->
     @template = Handlebars.compile ($ '#queries-template').html()
-    @model.get('savedQueries').on 'all', @render
     @model.on 'change:currentQuery change:currentDossier', @render
+    @render()
 
   events:
     'click a[href^=/dossiers/]': 'onDossierClick'
