@@ -22,22 +22,22 @@
 @OAQ = window.OAQ ? {}
 
 class @OAQ.QueryView extends Backbone.View
-  initialize: ->
+  initialize: () ->
     @template = Handlebars.compile ($ '#queries-template').html()
     @model.on 'change:currentQuery change:currentDossier', @render
     @render()
 
   events:
     'click a[href^=/dossiers/]': 'onDossierClick'
-    'click :button:contains("consulter")': 'onConsulterClick'
-    'click :button:contains("actualiser")': 'onActualiserClick'
+    'click :button.refresh': 'onRefreshClick'
+    'click :button.delete': 'onDeleteClick'
 
   render: =>
     context = {queries:[]}
     currentQuery = @model.get('currentQuery')
     currentDossier = @model.get('currentDossier')
 
-    @model.get('savedQueries').each (eachQuery) ->
+    @model.get(@options.propertyName).each (eachQuery) ->
       queryView = {info: eachQuery.toJSON(), results:[]}
       queryView.isCurrentQuery = if currentQuery then (currentQuery.id is eachQuery.id) else no
       if queryView.isCurrentQuery
@@ -50,15 +50,20 @@ class @OAQ.QueryView extends Backbone.View
     ($ @el).html @template context
 
   onDossierClick: (e) =>
-    e.preventDefault()
-    id = ($ e.target).data 'dossierid'
-    queryId = @model.get('currentQuery').id
-    OAQ.router.navigate("recherches/#{queryId}/dossiers/#{id}", {trigger:yes})
+    id = ($ e.target).attr 'data-dossier-id' # using '.data' converts the string to a double
+    OAQ.router.navigate "dossiers/#{id}", {trigger:yes}
+    no # propagation
 
-  onConsulterClick: (e) =>
-    id = ($ e.target).data 'queryid'
-    OAQ.router.navigate("recherches/#{id}", {trigger:yes})
+  onRefreshClick: (e) =>
+    id = ($ e.target).attr 'data-query-id'
+    query = @model.getQuery(id)
+    query.execute
+      success: (results) =>
+        @model.set('currentQuery', query)
+        OAQ.router.navigate "dossiers/#{results.first().id}", {trigger:yes}
 
-  onActualiserClick: (e) =>
-    (@model.get 'currentQuery').execute
-      success: @render
+  onDeleteClick: (e) =>
+    id = ($ e.target).attr 'data-query-id'
+    queries = @model.get('adhocQueries')
+    queries.remove queries.get(id)
+    @render()

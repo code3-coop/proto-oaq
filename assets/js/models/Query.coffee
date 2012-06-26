@@ -24,10 +24,15 @@ class @OAQ.Query extends Backbone.Model
   urlRoot: '/queries'
 
   initialize: ->
-    @set 'results', new OAQ.ResultSet(queryId:@id)
+    queryId = if @get('criteria') then 'libre' else @id
+    @set 'results', new OAQ.ResultSet({queryId})
 
   execute: (callbacks={}) ->
+    data = {}
+    if @get('criteria')
+      data.q = @get('criteria')
     (@get 'results').fetch
+      data: data
       success: (results) =>
         callbacks.success?(results)
 
@@ -37,14 +42,14 @@ class @OAQ.Query extends Backbone.Model
     index = @_indexOf id
     size = (@get 'results').size()
     if -1 < index < (size - 1)
-      fn (@get 'results').at(index + 1)
+      fn (@get 'results').at(index + 1).id
       
   prev: (id, fn) ->
     # finds the index of the currentDossier in `results`. If it isn't the last
     # item, navigate the router to the next dossier in `results`.
     index = @_indexOf id
     if index > 0
-      fn (@get 'results').at(index - 1)
+      fn (@get 'results').at(index - 1).id
 
   _indexOf: (id) ->
     indexFound = -1
