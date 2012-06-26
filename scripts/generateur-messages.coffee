@@ -59,11 +59,11 @@ noms = [
 ]
 
 subjects = [
-    "Nouveaux utilisateurs en défaut de paiement."
-    "As-tu regardé ce dossier?"
-    "Problème dossier #12345"
-    "Rappel : fin de période de souscription"
-    "Rappel : plusieurs utilisateurs en défaut"
+    "Utilisateur en défaut de paiement: #"
+    "As-tu regardé ce dossier? #"
+    "Problème dossier #"
+    "Formation incomplète pour dossier #"
+    "Paiement de souscription non reçu pour dossier #"
 ]
 
 loremIpsum = fs.readFileSync( "./lorem-ipsum.txt", "utf8" ).split "\n\n"
@@ -74,7 +74,7 @@ exports.genererMessage = ->
     message.destination = genererNumero()
     message.isRead = "false"
     message.author = "#{auHasardDans prenoms} #{auHasardDans noms}"
-    message.subject = auHasardDans subjects
+    message.subject = "#{auHasardDans subjects}#{genererNumero()}"
     message.body = auHasardDans loremIpsum
     message._keywords = genererKeywords message
     message.dateSent = new Date().getTime() - randomInt(30*24*60)*60*1000
