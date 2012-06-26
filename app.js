@@ -50,7 +50,7 @@ var dbManager = new mongo.Db(app.set('mongoDB'), server);
 dbManager.open(function (error, db) {
   dossiers = require('./routes/dossiers')(db);
   queries = require('./routes/queries')(db);
-  messages = require('./routes/messages')(db);
+  messages = require('./routes/messages')(db, mongo.BSONPure);
   require('./routes/api')(app, dossiers, queries, messages);
 
   app.listen(3000, function(){
