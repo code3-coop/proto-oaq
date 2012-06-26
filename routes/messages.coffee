@@ -34,7 +34,6 @@ module.exports = (db, BSON) ->
         response.json resultats
 
   putMessage: (id, request, response) ->
-    console.log ("changing #{id} with changes #{request.param('changes')}")
     changes = JSON.parse request.param('changes')
     db.collection "messages", {safe:true}, (err, collection) ->
       collection.update {"_id" : new BSON.ObjectID(id)}, {"$set" : changes}, {safe:true}, (err, result) ->
