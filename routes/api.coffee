@@ -31,3 +31,6 @@ module.exports = (app, dossiers, queries, messages) ->
 
     app.post '/', (req, res) ->
       messages.postMessage(req, res)
+
+    app.put '/:id', (req, res) ->
+      messages.putMessage(req.params.id, req, res)
