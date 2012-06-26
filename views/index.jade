@@ -1,22 +1,3 @@
-.navbar
-  .navbar-inner
-    .container
-      .pull-left
-        p.navbar-text
-          span.badge.badge-warning 4
-          |  messages non-lus
-          
-      .pull-right
-        ul.nav
-          li
-            p.navbar-text
-              i.icon-user.icon-white
-              |  Mme. Example
-          li
-            a(href="#")
-              i.icon-off.icon-white
-              |  Quitter
-
 .container-fluid
   .row-fluid.x-top-row
     .span2
@@ -34,24 +15,6 @@
         option Inspection professionnelle
       #x-saved-query-tree
       #x-adhoc-query-tree
-      // ul.nav.nav-list
-        li.divider
-        li.nav-header Dossiers ouverts
-        li: a(href="")
-          i.icon-user
-          | M. Pierre Deschamps
-        li: a(href="")
-          i.icon-home
-          | Vitruve inc.
-        li: a(href="")
-          i.icon-user
-          | Mme Denise Laroche
-        li: a(href="")
-          i.icon-user
-          | M. Jean Lafleur
-        li: a(href="")
-          i.icon-user
-          | M. Jacques Duchesne
     .span9
       .container-fluid
         .row-fluid
@@ -73,3 +36,4 @@ script(type="text/javascript")
 != partial('profile_template')
 != partial('tableau_ordre_template')
 != partial('queries_template')
+!= js('app')

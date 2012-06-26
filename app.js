@@ -37,9 +37,6 @@ app.configure('production', function(){
 });
 
 
-// Routes
-require('./routes/index')(app);
-
 mongo = require('mongodb');
 var serverOptions = {
     'auto_reconnect': true,
@@ -48,10 +45,12 @@ var serverOptions = {
 var server = new mongo.Server(app.set('mongoHost'), app.set('mongoPort'), serverOptions);
 var dbManager = new mongo.Db(app.set('mongoDB'), server);
 dbManager.open(function (error, db) {
+  require('./routes/index')(app, db);
   dossiers = require('./routes/dossiers')(db);
   queries = require('./routes/queries')(db);
   messages = require('./routes/messages')(db, mongo.BSONPure);
   require('./routes/api')(app, dossiers, queries, messages);
+
 
   app.listen(3000, function(){
     console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
