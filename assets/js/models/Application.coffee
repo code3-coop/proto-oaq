@@ -23,11 +23,15 @@
 class @OAQ.Application extends Backbone.Model
   defaults:
     savedQueries: new OAQ.Queries(OAQ._savedQueries)
+    adhocQueries: new OAQ.Queries()
+
+  getQuery: (id) ->
+    @get('savedQueries').get(id) or @get('adhocQueries').get(id)
 
   moveToNextDossier: -> @_moveTo 'next'
   moveToPrevDossier: -> @_moveTo 'prev'
 
   _moveTo: (direction) ->
-    (@get 'currentQuery')[direction] (@get 'currentDossier').id, (dossier) =>
-      OAQ.router.navigate "/recherches/#{(@get 'currentQuery').id}/dossiers/#{dossier.id}", {trigger:yes}
+    (@get 'currentQuery')[direction] (@get 'currentDossier').id, (id) ->
+      OAQ.router.navigate "dossiers/#{id}", {trigger:yes}
 

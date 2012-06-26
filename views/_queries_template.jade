@@ -1,26 +1,39 @@
-script#queries-template(type="text/x-handlebars-template")
-  ul.nav.nav-list
+script#queries-template(type="text/x-handlebars-template").
+  <ul class="nav nav-list">
     {{#each queries}}
-    li.nav-header {{info.label}}
-
-      {{#if isCurrentQuery}}
-      button.btn.btn-mini.pull-right actualiser
-
-      {{#each results}}
-      {{#if isCurrentDossier}}
-      li.active: a(href="/dossiers/{{info._id}}", data-dossierid="{{info._id}}")
-        i.icon-user.icon-white
-        | &nbsp;{{info.label}}
-      {{else}}
-      li: a(href="/dossiers/{{info._id}}", data-dossierid="{{info._id}}")
-        i.icon-user
-        | &nbsp;{{info.label}}
-      {{/if}}
-      {{/each}}
-
-      {{else}}
-      button.btn.btn-mini.pull-right(data-queryid="{{info._id}}") consulter
-
-      {{/if}}
-    li.divider
+    <li class="nav-header">
+      {{info.label}}
+      <div class="btn-group pull-right">
+        {{#if info.criteria}}
+          <button class="delete btn btn-mini btn-inverse" data-query-id="{{info._id}}">retirer</button>
+        {{/if}}
+        <button class="refresh btn btn-mini" data-query-id="{{info._id}}">
+          {{#if isCurrentQuery}}
+            actualiser
+          {{else}}
+            consulter
+          {{/if}}
+        </button>
+      </div>
+    </li>
+    {{#if isCurrentQuery}}
+    {{#each results}}
+    {{#if isCurrentDossier}}
+    <li class="active">
+    {{else}}
+    <li>
+    {{/if}}
+      <a href="/dossiers/{{info._id}}" data-dossier-id="{{info._id}}">
+        {{#if isCurrentDossier}}
+        <i class="icon-user icon-white"/>
+        {{else}}
+        <i class="icon-user"/>
+        {{/if}}
+        &nbsp;{{info.label}}
+      </a>
+    </li>
     {{/each}}
+    {{/if}}
+    <li class="divider"/>
+    {{/each}}
+  </ul>

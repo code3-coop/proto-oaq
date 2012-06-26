@@ -53,7 +53,7 @@ module.exports = (db) ->
 
 extractKeywords = (keywords) ->
   #fix up method later to clean up params
-  keywords.split " "
+  keywords.split /\s+/
 
 getTextQueryResults = (db, keywords, response) ->
   if !keywords then keywords = ""

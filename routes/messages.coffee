@@ -76,4 +76,3 @@ parseMessage = (resultat)->
     subject: resultat.subject
     isRead: resultat.isRead
   }
-  
