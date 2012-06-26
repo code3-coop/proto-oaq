@@ -21,8 +21,9 @@ html.no-js(lang='en') <!--<![endif]-->
         .container
           .pull-left
             p.navbar-text
-              span.badge.badge-warning 4
-              |  messages non-lus
+              a(href="/messages", style="color:#999;")
+                span.badge.badge-warning #{messages.length}
+                |  messages non-lus
               
           .pull-right
             ul.nav
