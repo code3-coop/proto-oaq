@@ -30,7 +30,7 @@ module.exports = (app, db) ->
     db.collection 'messages', (err, collection) ->
       messages = []
       unreadCount = 0
-      stream = collection.find().streamRecords()
+      stream = collection.find({}, {sort:[['dateSent','desc']]}).streamRecords()
       stream.on 'data', (data) ->
         messages.push data
         unreadCount += 1 if data.isRead is 'false'

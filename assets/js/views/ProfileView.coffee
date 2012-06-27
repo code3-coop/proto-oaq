@@ -36,7 +36,7 @@ class @OAQ.ProfileView extends Backbone.View
     note = dossier.get('notes')?[0]
     context =
       dossier: dossier.toJSON()
-      imgUrl: "http://www.gravatar.com/avatar/#{CryptoJS.MD5(adresse.courriel)}?s=57&d=#{window.encodeURIComponent(window.location.origin+'/img/avatar.png')}"
+      imgUrl: "http://www.gravatar.com/avatar/#{CryptoJS.MD5(adresse.courriel)}?s=57&d=mm"
       adresse: adresse
     if note
       context.note =

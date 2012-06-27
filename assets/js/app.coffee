@@ -9,6 +9,8 @@
 #= require views/ProfileView
 #= require views/ContextView
 
+#= require navbar
+
 @OAQ = window.OAQ ? {}
 
 $ ->

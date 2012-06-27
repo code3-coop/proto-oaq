@@ -1,6 +1,5 @@
 #= require vendor/jquery
-
-@OAQ = window.OAQ ? {}
+#= require navbar
 
 $ ->
   

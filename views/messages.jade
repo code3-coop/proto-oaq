@@ -9,12 +9,12 @@
       hr
   each message in messages
     .row(style="opacity:#{opacityFor(message)}")
-      .span12
+      .span10
           i.icon-envelope
-          strong
-            #{fromNow(message.dateSent)} #{message.author} a écrit
+          strong &nbsp;#{fromNow(message.dateSent)} #{message.author} a écrit
         - if (message.isRead === 'false')
-          button.btn.btn-mini.pull-right.x-mark-read(data-id="#{message._id}") marquer comme lu
+          .span2
+            button.btn.btn-mini.pull-right.x-mark-read(data-id="#{message._id}") marquer comme lu
     .row(style="margin-top:.5em; opacity:#{opacityFor(message)}")
       .span1
         img.x-message-profile-pic.pull-left(src="http://www.gravatar.com/avatar/76f0d24ad87d65debc82aed00720f1cr?s=36&d=mm")
@@ -24,5 +24,5 @@
     .row
       .span12
         hr
-  
+
 != js('messages-app')

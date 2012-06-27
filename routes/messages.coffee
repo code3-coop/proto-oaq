@@ -1,5 +1,6 @@
 _ = require '../assets/js/vendor/underscore'
-module.exports = (db, BSON) ->
+
+module.exports = (app, db, BSON) ->
 
   deleteMessage: (id, response) ->
     db.collection "messages", {safe:true}, (err, collection) ->
@@ -34,11 +35,12 @@ module.exports = (db, BSON) ->
         response.json resultats
 
   putMessage: (id, request, response) ->
-    # changes = JSON.parse request.param('changes')
     changes = request.body
     db.collection "messages", {safe:true}, (err, collection) ->
       collection.update {"_id" : new BSON.ObjectID(id)}, {"$set" : changes}, {safe:true}, (err, result) ->
         if err then throw err
+        collection.find(isRead:'false').count (err, count) ->
+          app.settings.sio.sockets.emit 'change:unreadCount', count
     response.send 200
 
   getMessage: (id, response) ->

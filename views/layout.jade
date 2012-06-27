@@ -16,23 +16,5 @@ html.no-js(lang='en') <!--<![endif]-->
       script(src='http://html5shiv.googlecode.com/svn/trunk/html5.js')
     != js('vendor/modernizr')
   body
-    .navbar
-      .navbar-inner
-        .container
-          .pull-left
-            p.navbar-text
-              a(href="/messages", style="color:#999;")
-                button.btn.btn-warning #{unreadCount}
-                |  messages non-lus
-              
-          .pull-right
-            ul.nav
-              li
-                p.navbar-text
-                  i.icon-user.icon-white
-                  |  Mme. Example
-              li
-                a(href="#")
-                  i.icon-off.icon-white
-                  |  Quitter
+    != partial('navbar')
     != body

@@ -1,0 +1,27 @@
+.navbar
+  .navbar-inner
+    .container
+      .pull-left
+        ul.nav
+          li
+            a(href="/")
+              i.icon-home.icon-white
+          li
+            p.navbar-text
+              if unreadCount == 0
+                button.btn.btn-success.x-btn-messages aucun message non-lu
+              else if unreadCount == 1
+                button.btn.btn-warning.x-btn-messages 1 message non-lus
+              else
+                button.btn.btn-warning.x-btn-messages #{unreadCount} messages non-lus
+          
+      .pull-right
+        ul.nav
+          li
+            p.navbar-text
+              i.icon-user.icon-white
+              |  Mme. Example
+          li
+            a(href="#")
+              i.icon-off.icon-white
+              |  Quitter

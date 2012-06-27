@@ -6,15 +6,18 @@ require('coffee-script');
 
 var express = require('express');
 
+
 require('express-namespace');
 
-var app = module.exports = express.createServer();
+var app = module.exports = express.createServer(),
+    sio = require('socket.io').listen(app);
 
 // Configuration
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
+  app.set('sio', sio);
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
@@ -48,7 +51,7 @@ dbManager.open(function (error, db) {
   require('./routes/index')(app, db);
   dossiers = require('./routes/dossiers')(db);
   queries = require('./routes/queries')(db);
-  messages = require('./routes/messages')(db, mongo.BSONPure);
+  messages = require('./routes/messages')(app, db, mongo.BSONPure);
   require('./routes/api')(app, dossiers, queries, messages);
 
 
