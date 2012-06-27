@@ -22,7 +22,7 @@ html.no-js(lang='en') <!--<![endif]-->
           .pull-left
             p.navbar-text
               a(href="/messages", style="color:#999;")
-                span.badge.badge-warning #{messages.length}
+                button.btn.btn-warning #{unreadCount}
                 |  messages non-lus
               
           .pull-right
@@ -36,4 +36,3 @@ html.no-js(lang='en') <!--<![endif]-->
                   i.icon-off.icon-white
                   |  Quitter
     != body
-
