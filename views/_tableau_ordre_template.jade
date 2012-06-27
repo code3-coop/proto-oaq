@@ -6,20 +6,42 @@ script#tableau-ordre-template(type="text/x-handlebars-template")
       li: a(href="#tab3", data-toggle="tab") Notes
     .tab-content
       #tab1.tab-pane.active
-        form.form-horizontal
-          fieldset
-            .control-group
-              label.control-label(for="nom") Nom
-              .controls
-                input#nom.input-xlarge(type="text", value="{{nomFamille}}")
-            .control-group
-              label.control-label(for="prenom") Prénom
-              .controls
-                input#prenom.input-xlarge(type="text", value="{{prenom}}")
-            .control-group
-              label.control-label(for="dob") Date de naissance
-              .controls
-                input#dob.input-xlarge(type="text", value="{{dateNaissance}}")
+        .container-fluid
+          .row-fluid
+            .span6
+              form.form-horizontal
+                fieldset
+                  .control-group
+                    label.control-label(for="prenom") Prénom
+                    .controls
+                      input#prenom(type="text", value="{{prenom}}")
+                  .control-group
+                    label.control-label(for="nomFamille") Nom famille
+                    .controls
+                      input#nomFamille(type="text", value="{{nomFamille}}")
+                  .control-group
+                    label.control-label(for="prefixe") Préfixe
+                    .controls
+                      input#prefixe(type="text", value="{{prefixe}}")
+                  .control-group
+                    label.control-label(for="suffixe") Suffixe
+                    .controls
+                      input#suffixe(type="text", value="{{suffixe}}")
+            .span6
+              form.form-horizontal
+                fieldset
+                  .control-group
+                    label.control-label(for="dateNaissance") Date de naissance
+                    .controls
+                      input#dateNaissance(type="text", value="{{dateNaissance}}")
+                  .control-group
+                    label.control-label(for="sexe") Sexe
+                    .controls
+                      select#sexe.
+                        {{#option sexe value="0"}}inconnu{{/option}}
+                        {{#option sexe value="1"}}masculin{{/option}}
+                        {{#option sexe value="2"}}féminin{{/option}}
+                        {{#option sexe value="3"}}s.o.{{/option}}
       #tab2.tab-pane
         h4 Adresses
       #tab3.tab-pane

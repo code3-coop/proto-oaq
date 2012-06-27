@@ -5,7 +5,11 @@ script#profile-info-template(type="text/x-handlebars-template")
         .x-profile-pic
           img(src="{{imgUrl}}")
         .x-info-sheet
-          .x-name {{dossier.prefixe}} {{dossier.prenom}} {{dossier.nomFamille}}
+          .x-name
+            | {{dossier.prefixe}} {{dossier.prenom}} {{dossier.nomFamille}}
+            {{#if dossier.suffixe}}
+            |, {{dossier.suffixe}}
+            {{/if}}
           {{#if adresse.unite}}
           .x-address {{adresse.unite}}-{{adresse.rue}}
           {{else}}
