@@ -16,7 +16,7 @@
 #= require ../vendor/jquery
 #= require ../vendor/backbone
 #= require ../vendor/handlebars
-#= require ../utils/handlebars
+#= require ../extensions/handlebars
 
 @OAQ = window.OAQ ? {}
 

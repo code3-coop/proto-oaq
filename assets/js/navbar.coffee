@@ -16,3 +16,4 @@ $ ->
   btn.on 'click', ->
     window.location = '/messages'
     no # propagation
+
