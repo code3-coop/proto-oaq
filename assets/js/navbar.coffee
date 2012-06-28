@@ -26,7 +26,7 @@ $ ->
   adjustColor = (results) ->
     count = results.length
     switch count
-      when 0 then btn.html("aucun message non-lu").removeClass('btn-warning').addClass('btn-success')
+      when 0 then btn.html("aucun message non-lu").removeClass('btn-warning').addClass('btn-inverse')
       when 1 then btn.html("1 message non-lu").addClass('btn-warning')
       else btn.html("#{count} messages non-lus").addClass('btn-warning')
 
