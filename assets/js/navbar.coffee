@@ -21,8 +21,10 @@
 $ ->
 
   btn = ($ '.x-btn-messages')
+  unread = []
 
-  adjustColor = (count) ->
+  adjustColor = (results) ->
+    count = results.length
     switch count
       when 0 then btn.html("aucun message non-lu").removeClass('btn-warning').addClass('btn-success')
       when 1 then btn.html("1 message non-lu").addClass('btn-warning')
@@ -30,6 +32,7 @@ $ ->
 
   socket = io.connect '/'
   socket.on 'change:unread', adjustColor
+  socket.on 'change:unread', (results) -> unread = results
 
   btn.on 'click', ->
     window.location = '/messages'
@@ -39,12 +42,13 @@ $ ->
     url: '/messages/nonlu'
     dataType: 'json'
     success: (data) ->
+      unread = data
       btn.popover
         placement: 'bottom'
         title: 'Messages non-lus'
         content: ->
           html = ""
-          for each in data
+          for each in unread
             html += "<li><img class='pull-left' src='http://www.gravatar.com/avatar/7e48cdee24a5707ea4ed47e8465496be?s=30&d=mm'><span>#{each.subject}</span></li>"
           html
 

@@ -39,8 +39,8 @@ module.exports = (app, db, BSON) ->
     db.collection "messages", {safe:true}, (err, collection) ->
       collection.update {"_id" : new BSON.ObjectID(id)}, {"$set" : changes}, {safe:true}, (err, result) ->
         if err then throw err
-        collection.find(isRead:'false').count (err, count) ->
-          app.settings.sio.sockets.emit 'change:unreadCount', count
+        collection.find({isRead:'false'}, {sort:[['dateSent','desc']]}).toArray (err, results) ->
+          app.settings.sio.sockets.emit 'change:unread', results
     response.send 200
 
   getMessage: (id, response) ->
@@ -50,7 +50,7 @@ module.exports = (app, db, BSON) ->
       db.collection "messages", {safe:true}, (err, collection) ->
         resultats = []
         if err then throw err
-        stream = collection.find({"isRead":"false"}).streamRecords()
+        stream = collection.find({isRead:'false'}, {sort:[['dateSent', 'desc']]}).streamRecords()
         stream.on "data", (resultat) ->
           resultats.push parseMessage(resultat)
         stream.on "end", ->
