@@ -10,6 +10,7 @@ script#profile-info-template(type="text/x-handlebars-template")
             {{#if dossier.suffixe}}
             |, {{dossier.suffixe}}
             {{/if}}
+            | (#&nbsp;{{dossier.numero}})
           {{#if adresse.unite}}
           .x-address {{adresse.unite}}-{{adresse.rue}}
           {{else}}
