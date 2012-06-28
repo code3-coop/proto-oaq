@@ -23,8 +23,13 @@
 
 class @OAQ.ContextView extends Backbone.View
   initialize: ->
-    @tableauOrdreTemplate = Handlebars.compile ($ '#tableau-ordre-template').html()
-    @model.on 'change:currentDossier', @render
+    @templates =
+      tableauOrdre: Handlebars.compile ($ '#tableau-ordre-template').html()
+      formationContinue: Handlebars.compile ($ '#formation-continue-template').html()
+      inspectionProfessionnelle: Handlebars.compile ($ '#inspection-professionnelle-template').html()
+    @model.on 'change:currentDossier change:currentContext', @render
 
   render: =>
-    ($ @el).html @tableauOrdreTemplate @model.get('currentDossier').toJSON()
+    ($ @el).html @getTemplate()(@model.get('currentDossier').toJSON())
+
+  getTemplate: => @templates[@model.get('currentContext')]

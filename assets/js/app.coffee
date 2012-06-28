@@ -48,6 +48,10 @@ $ ->
         OAQ.router.navigate "dossiers/#{results.first().id}", {trigger:yes}
     no # propagation
 
+  ($ '#x-context-picker').on 'change', ->
+    # should use router to save context to url instead...
+    application.set 'currentContext', ($ @).val()
+
   ($ '#x-profile-nav-next').on 'click', ->
     application.moveToNextDossier()
 

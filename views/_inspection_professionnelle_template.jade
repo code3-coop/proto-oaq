@@ -1,0 +1,39 @@
+script#inspection-professionnelle-template(type="text/x-handlebars-template")
+  .tabbable
+    ul.nav.nav-tabs
+      li.active: a(href="#tab1", data-toggle="tab") Visites
+      li: a(href="#tab2", data-toggle="tab") Rapports d'inspection
+      li: a(href="#tab3", data-toggle="tab") Notes
+    .tab-content
+      #tab1.tab-pane.active
+        .container-fluid
+          .row-fluid
+            .span12
+              table.table.table-bordered.table-striped
+                thead: tr
+                  th Effectuée par
+                  th Visité le
+                  th Constat
+                tbody
+                  tr
+                    td Quentin White, MBA
+                    td 2010-06-01
+                    td: i.icon-thumbs-down
+                  tr
+                    td Dre Xéna Underwood
+                    td 2011-05-10
+                    td: i.icon-thumbs-up
+                  tr
+                    td Me Isidor Quenneville, avocat
+                    td 2012-07-03
+                    td: i.icon-thumbs-up
+      #tab2.tab-pane
+        h4 Rapports d'inspection
+      #tab3.tab-pane
+        h4 Notes
+  .form-actions
+    button.btn.btn-success(type="submit") Enregistrer
+    | &nbsp;
+    button.btn Annuler
+
+

@@ -19,3 +19,6 @@ Handlebars.registerHelper 'option', (val, options) ->
   html = "<option value='#{options.hash.value}'"
   html += " selected" if val is options.hash.value
   html + "> #{options.fn @}</option>"
+
+Handlebars.registerHelper 'random', (options) ->
+  Math.floor Math.random() * (options.hash.max - 1)

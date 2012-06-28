@@ -1,0 +1,43 @@
+script#formation-continue-template(type="text/x-handlebars-template")
+  .tabbable
+    ul.nav.nav-tabs
+      li.active: a(href="#tab1", data-toggle="tab") Formations suivies
+      li: a(href="#tab2", data-toggle="tab") Déclarations
+      li: a(href="#tab3", data-toggle="tab") Notes
+    .tab-content
+      #tab1.tab-pane.active
+        .container-fluid
+          .row-fluid
+            .span12
+              h4 Avancement
+              br
+              .progress: .bar(style="width:{{random min=0 max=100}}%")
+          .row-fluid
+            .span12
+              table.table.table-bordered.table-striped
+                thead: tr
+                  th Formation
+                  th Suivie le
+                  th Nombre d'heures
+                tbody
+                  tr
+                    td Philosophia vero perficit architectum animo magno.
+                    td 2012-06-01
+                    td 3 heures
+                  tr
+                    td Musicen autem sciat oportet, uti canonicam rationem.
+                    td 2012-06-30
+                    td 2,5 heures
+                tfoot:tr
+                  td
+                  td
+                  td: b 5,5 heures
+      #tab2.tab-pane
+        h4 Déclarations
+      #tab3.tab-pane
+        h4 Notes
+  .form-actions
+    button.btn.btn-success(type="submit") Enregistrer
+    | &nbsp;
+    button.btn Annuler
+

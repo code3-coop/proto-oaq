@@ -24,6 +24,7 @@ class @OAQ.Application extends Backbone.Model
   defaults:
     savedQueries: new OAQ.Queries(OAQ._savedQueries)
     adhocQueries: new OAQ.Queries()
+    currentContext: 'tableauOrdre'
 
   getQuery: (id) ->
     @get('savedQueries').get(id) or @get('adhocQueries').get(id)

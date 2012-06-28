@@ -9,10 +9,10 @@
           button.btn(type="submit"): i.icon-search
   .row-fluid
     .span3.well.x-nav-menu
-      form: select
-        option Tableau de l'Ordre
-        option Formation continue
-        option Inspection professionnelle
+      form: select#x-context-picker
+        option(value="tableauOrdre") Tableau de l'Ordre
+        option(value="formationContinue") Formation continue
+        option(value="inspectionProfessionnelle") Inspection professionnelle
       #x-saved-query-tree
       #x-adhoc-query-tree
     .span9
@@ -35,5 +35,7 @@ script(type="text/javascript")
 
 != partial('profile_template')
 != partial('tableau_ordre_template')
+!= partial('formation_continue_template')
+!= partial('inspection_professionnelle_template')
 != partial('queries_template')
 != js('app')
