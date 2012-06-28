@@ -28,14 +28,23 @@ $ ->
       when 1 then btn.html("1 message non-lu").addClass('btn-warning')
       else btn.html("#{count} messages non-lus").addClass('btn-warning')
 
-  (io.connect '/').on 'change:unreadCount', adjustColor
+  socket = io.connect '/'
+  socket.on 'change:unread', adjustColor
 
   btn.on 'click', ->
     window.location = '/messages'
     no # propagation
 
-  btn.popover
-    title: 'Messages'
-    content: '<ul><li>asdasdasd</li><li>asdasdasdasd</li></ul>'
-    placement: 'bottom'
+  $.ajax
+    url: '/messages/nonlu'
+    dataType: 'json'
+    success: (data) ->
+      btn.popover
+        placement: 'bottom'
+        title: 'Messages non-lus'
+        content: ->
+          html = ""
+          for each in data
+            html += "<li><img class='pull-left' src='http://www.gravatar.com/avatar/7e48cdee24a5707ea4ed47e8465496be?s=30&d=mm'><span>#{each.subject}</span></li>"
+          html
 

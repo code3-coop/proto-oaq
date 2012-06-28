@@ -20,6 +20,8 @@
 
 $.fn.popover.Constructor::getPosition = (inside) ->
   offset = if inside then {top:0, left:0} else @$element.offset()
-  offset.left += 20
+  offset.left += 18
   dimensions = {width: @$element[0].offsetWidth, height: @$element[0].offsetHeight}
   $.extend {}, offset, dimensions
+
+$.fn.popover.defaults.template = "<div class='popover'><div class='arrow'></div><div class='popover-inner'><h3 class='popover-title'></h3><div class='popover-content'><ul></ul></div></div></div>"
