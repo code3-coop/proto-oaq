@@ -5,13 +5,17 @@ script#queries-template(type="text/x-handlebars-template").
       {{info.label}}
       <div class="btn-group pull-right">
         {{#if info.criteria}}
-          <button class="delete btn btn-mini btn-inverse" data-query-id="{{info._id}}">retirer</button>
+          <button class="delete btn btn-mini" data-query-id="{{info._id}}"><i class="icon-remove"></i></button>
         {{/if}}
         <button class="refresh btn btn-mini" data-query-id="{{info._id}}">
-          {{#if isCurrentQuery}}
-            actualiser
+          {{#if info.criteria}}
+            <i class="icon-refresh"/>
           {{else}}
-            consulter
+            {{#if isCurrentQuery}}
+              actualiser
+            {{else}}
+              consulter
+            {{/if}}
           {{/if}}
         </button>
       </div>

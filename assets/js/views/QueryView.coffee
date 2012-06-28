@@ -55,7 +55,7 @@ class @OAQ.QueryView extends Backbone.View
     no # propagation
 
   onRefreshClick: (e) =>
-    id = ($ e.target).attr 'data-query-id'
+    id = ($ e.target).closest('button').attr 'data-query-id'
     query = @model.getQuery(id)
     query.execute
       success: (results) =>
@@ -63,7 +63,7 @@ class @OAQ.QueryView extends Backbone.View
         OAQ.router.navigate "dossiers/#{results.first().id}", {trigger:yes}
 
   onDeleteClick: (e) =>
-    id = ($ e.target).attr 'data-query-id'
+    id = ($ e.target).closest('button').attr 'data-query-id'
     queries = @model.get('adhocQueries')
     queries.remove queries.get(id)
     @render()
