@@ -24,4 +24,6 @@ $.fn.popover.Constructor::getPosition = (inside) ->
   dimensions = {width: @$element[0].offsetWidth, height: @$element[0].offsetHeight}
   $.extend {}, offset, dimensions
 
+# Replace the default template.
+
 $.fn.popover.defaults.template = "<div class='popover'><div class='arrow'></div><div class='popover-inner'><h3 class='popover-title'></h3><div class='popover-content'><ul></ul></div></div></div>"
