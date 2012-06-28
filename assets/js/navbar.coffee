@@ -47,8 +47,5 @@ $ ->
         placement: 'bottom'
         title: 'Messages non-lus'
         content: ->
-          html = ""
-          for each in unread
-            html += "<li><img class='pull-left' src='http://www.gravatar.com/avatar/7e48cdee24a5707ea4ed47e8465496be?s=30&d=mm'><span>#{each.subject}</span></li>"
-          html
+          ("<li><img class='pull-left' src='http://www.gravatar.com/avatar/7e48cdee24a5707ea4ed47e8465496be?s=30&d=mm'><span>#{each.subject}</span></li>" for each in unread).join('')
 

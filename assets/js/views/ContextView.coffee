@@ -15,6 +15,7 @@
 
 #= require ../vendor/jquery
 #= require ../vendor/backbone
+#= require ../vendor/bootstrap
 #= require ../vendor/handlebars
 #= require ../extensions/handlebars
 
