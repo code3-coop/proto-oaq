@@ -23,7 +23,6 @@ class @OAQ.Router extends Backbone.Router
   routes:
     'dossiers/:id' : 'findDossier'
 
-
   findDossier: (id) ->
     new OAQ.Dossier(_id:id).fetch
       success: (found) =>
