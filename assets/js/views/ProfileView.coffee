@@ -20,6 +20,7 @@
 #= require ../vendor/moment
 #= require ../vendor/moment-fr
 #= require ../vendor/dotdotdot
+#= require ../templates/profile
 
 moment.lang 'fr'
 
@@ -27,22 +28,15 @@ moment.lang 'fr'
 
 class @OAQ.ProfileView extends Backbone.View
   initialize: ->
-    @template = Handlebars.compile ($ '#profile-info-template').html()
+    @template = OAQ.templates.profile
     @model.on 'change:currentDossier', @render
 
   render: =>
-    dossier = @model.get('currentDossier')
-    adresse = dossier.get('adresses')[0]
-    note = dossier.get('notes')?[0]
-    context =
-      dossier: dossier.toJSON()
-      imgUrl: "http://www.gravatar.com/avatar/#{CryptoJS.MD5(adresse.courriel)}?s=57&d=mm"
-      adresse: adresse
-    if note
-      context.note =
-        dateCreation: moment(note.dateCreation).fromNow()
-        contenu: note.contenu
-        auteur: note.auteur
+    context = (@model.get 'currentDossier').toJSON()
+    context.imgUrl = "http://www.gravatar.com/avatar/#{CryptoJS.MD5(context.courriel)}?s=57&d=mm"
+    each.dateCreation = (moment each.dateCreation).fromNow() for each in context.notes if context.notes
+
     ($ @el).html @template context
+
     @$('.x-body').dotdotdot
       height: 60

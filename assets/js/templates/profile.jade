@@ -1,0 +1,34 @@
+//- Copyright (C) 2012  CODE3 Cooperative de solidarite
+//- 
+//- This program is free software: you can redistribute it and/or modify
+//- it under the terms of the GNU General Public License as published by
+//- the Free Software Foundation, either version 3 of the License, or
+//- (at your option) any later version.
+//- 
+//- This program is distributed in the hope that it will be useful,
+//- but WITHOUT ANY WARRANTY; without even the implied warranty of
+//- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//- GNU General Public License for more details.
+//- 
+//- You should have received a copy of the GNU General Public License
+//- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+//-= require ../vendor/jade-runtime
+
+.container-fluid
+  .row-fluid
+    .span6
+      .x-profile-pic
+        img(src="#{imgUrl}")
+      .x-info-sheet
+        .x-name #{prefixe ? prefixe + ' ' : ''}#{prenom} #{nomFamille}#{suffixe ? ', ' + suffixe : ''} (#&nbsp;#{numero})
+        - var adr = adresses[0]
+        .x-address #{adr.unite ? adr.unite + '-' : ''}#{adr.rue}
+        .x-address #{adr.ville} (#{adr.province})  #{adr.codePostal}
+    .span6
+      if notes
+        - var note = notes[0]
+        .x-notes
+          .x-date= note.dateCreation
+          .x-body= note.contenu
+          .x-auth= note.auteur
