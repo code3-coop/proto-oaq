@@ -84,12 +84,12 @@ subjects = [
 loremIpsum = fs.readFileSync( "./lorem-ipsum.txt", "utf8" ).split "\n\n"
 pattern = /[\w\u00C0-\u00FF]+/g
 
-exports.genererMessage = ->
+exports.genererMessage = (numeroDossier) ->
     message = {}
     message.destination = genererNumero()
     message.isRead = "false"
     message.author = "#{auHasardDans prenoms} #{auHasardDans noms}"
-    message.subject = "#{auHasardDans subjects}#{genererNumero()}"
+    message.subject = "#{auHasardDans subjects}#{numeroDossier}"
     message.body = auHasardDans loremIpsum
     message._keywords = genererKeywords message
     message.dateSent = new Date().getTime() - randomInt(30*24*60)*60*1000

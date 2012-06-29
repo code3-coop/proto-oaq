@@ -36,7 +36,7 @@
       .span1
         img.x-message-profile-pic.pull-left(src="http://www.gravatar.com/avatar/76f0d24ad87d65debc82aed00720f1cr?s=36&d=mm")
       .span9
-        b #{message.subject}
+        b!= parseDossierRefs(message.subject)
         p #{message.body}
     .row
       .span12

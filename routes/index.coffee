@@ -24,6 +24,8 @@ module.exports = (app, db) ->
       moment(date).fromNow()
     opacityFor: (message) ->
       if message.isRead is 'true' then '.5' else '1'
+    parseDossierRefs: (str) ->
+      str.replace /#(\d+)/, ($0, $1) -> "<a href='/#dossiers/#{$1}'>#{$0}</a>"
 
   app.get '/', (req, res) ->
     res.render 'index'
