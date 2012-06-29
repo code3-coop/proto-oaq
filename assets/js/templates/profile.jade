@@ -28,11 +28,6 @@
         img(src="http://www.gravatar.com/avatar/#{CryptoJS.MD5(adr.courriel)}?s=57&d=mm")
       .x-info-sheet
         .x-name #{prefixe ? prefixe + ' ' : ''}#{prenom} #{nomFamille}#{suffixe ? ', ' + suffixe : ''} (#&nbsp;#{numero})
-      .x-profile-pic
-        img(src="#{imgUrl}")
-      .x-info-sheet
-        .x-name #{prefixe ? prefixe + ' ' : ''}#{prenom} #{nomFamille}#{suffixe ? ', ' + suffixe : ''} (#&nbsp;#{numero})
-        - var adr = adresses[0]
         .x-address #{adr.unite ? adr.unite + '-' : ''}#{adr.rue}
         .x-address #{adr.ville} (#{adr.province})  #{adr.codePostal}
     .span6
