@@ -16,13 +16,13 @@
 script#queries-template(type="text/x-handlebars-template").
   <ul class="nav nav-list">
     {{#each queries}}
-    <li class="nav-header">
+    <li class="nav-header" data-query-id="{{info._id}}">
       {{info.label}}
       <div class="btn-group pull-right">
         {{#if info.criteria}}
-          <button class="delete btn btn-mini" data-query-id="{{info._id}}"><i class="icon-trash"></i></button>
+          <button class="delete btn btn-mini"><i class="icon-trash"></i></button>
         {{/if}}
-        <button class="refresh btn btn-mini" data-query-id="{{info._id}}">
+        <button class="refresh btn btn-mini">
           {{#if info.criteria}}
             <i class="icon-refresh"/>
           {{else}}

@@ -30,6 +30,7 @@ class @OAQ.QueryView extends Backbone.View
   events:
     'click a[href^=/dossiers/]': 'onDossierClick'
     'click :button.refresh': 'onRefreshClick'
+    'click .nav-header': 'onRefreshClick'
     'click :button.delete': 'onDeleteClick'
 
   render: =>
@@ -55,15 +56,17 @@ class @OAQ.QueryView extends Backbone.View
     no # propagation
 
   onRefreshClick: (e) =>
-    id = ($ e.target).closest('button').attr 'data-query-id'
+    id = ($ e.target).closest('.nav-header').attr 'data-query-id'
     query = @model.getQuery(id)
     query.execute
       success: (results) =>
         @model.set('currentQuery', query)
         OAQ.router.navigate "dossiers/#{results.first().id}", {trigger:yes}
+    no # propagation
 
   onDeleteClick: (e) =>
-    id = ($ e.target).closest('button').attr 'data-query-id'
+    id = ($ e.target).closest('.nav-header').attr 'data-query-id'
     queries = @model.get('adhocQueries')
     queries.remove queries.get(id)
     @render()
+    no # propagation
