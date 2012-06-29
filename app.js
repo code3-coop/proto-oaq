@@ -21,13 +21,40 @@ require('coffee-script');
  * Module dependencies.
  */
 
-var express = require('express');
-
+var express = require('express'),
+    jade = require('jade'),
+    UglifyJS = require('uglify-js');
 
 require('express-namespace');
 
 var app = module.exports = express.createServer(),
     sio = require('socket.io').listen(app);
+
+var uglify = function (source) {
+  var pro = UglifyJS.uglify,
+      ast = UglifyJS.parser.parse(source);
+  ast = pro.ast_mangle(ast);
+  ast = pro.ast_squeeze(ast);
+  return pro.gen_code(ast);
+};
+
+var assets = require('connect-assets')({
+  jsCompilers: {
+    jade: {
+      match: /\.jade$/,
+      compileSync: function (sourcePath, source) {
+        var templateName = "";
+        sourcePath.replace(/.+\/templates\/([^.]+)\.jade$/, function ($0, $1) { templateName = $1; });
+        return uglify(
+          "var _ref, _ref1;" +
+          "this.OAQ = (_ref = window.OAQ) != null ? _ref : {};" +
+          "this.OAQ.templates = (_ref1 = this.OAQ.templates) != null ? _ref1 : {};" +
+          "this.OAQ.templates." + templateName + " = " + jade.compile(source, {client:true, compileDebug:false})
+        );
+      }
+    }
+  }
+});
 
 // Configuration
 
@@ -38,7 +65,7 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
-  app.use(require('connect-assets')());
+  app.use(assets);
   app.use(express.static(__dirname + '/public'));
 });
 
