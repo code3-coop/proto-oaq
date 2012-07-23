@@ -18,6 +18,8 @@
 #= require ../vendor/bootstrap
 #= require ../vendor/handlebars
 #= require ../extensions/handlebars
+#= require ../vendor/socket.io
+#= require ../templates/documents
 
 @OAQ = window.OAQ ? {}
 
@@ -27,9 +29,16 @@ class @OAQ.ContextView extends Backbone.View
       tableauOrdre: Handlebars.compile ($ '#tableau-ordre-template').html()
       formationContinue: Handlebars.compile ($ '#formation-continue-template').html()
       inspectionProfessionnelle: Handlebars.compile ($ '#inspection-professionnelle-template').html()
+      documents: OAQ.templates.documents
     @model.on 'change:currentDossier change:currentContext', @render
+    socket = io.connect '/'
+    socket.on 'cmis', @renderDocumentsTab
 
   render: =>
     ($ @el).html @getTemplate()(@model.get('currentDossier').toJSON())
+
+  renderDocumentsTab: (data) =>
+    tab = @$el.find('#documents')
+    tab.html @templates.documents {docs:data} if tab
 
   getTemplate: => @templates[@model.get('currentContext')]

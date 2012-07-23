@@ -93,7 +93,7 @@ var server = new mongo.Server(app.set('mongoHost'), app.set('mongoPort'), server
 var dbManager = new mongo.Db(app.set('mongoDB'), server);
 dbManager.open(function (error, db) {
   require('./routes/index')(app, db);
-  dossiers = require('./routes/dossiers')(db);
+  dossiers = require('./routes/dossiers')(app, db);
   queries = require('./routes/queries')(db);
   messages = require('./routes/messages')(app, db, mongo.BSONPure);
   require('./routes/api')(app, dossiers, queries, messages);

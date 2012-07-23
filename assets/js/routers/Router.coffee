@@ -25,6 +25,7 @@ class @OAQ.Router extends Backbone.Router
 
   findDossier: (id) ->
     new OAQ.Dossier(_id:id).fetch
+      cache: off
       success: (found) =>
         OAQ.app.set 'currentDossier', found
       error: =>

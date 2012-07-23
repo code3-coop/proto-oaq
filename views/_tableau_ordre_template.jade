@@ -18,7 +18,8 @@ script#tableau-ordre-template(type="text/x-handlebars-template")
     ul.nav.nav-tabs
       li.active: a(href="#tab1", data-toggle="tab") Fiche signalétique
       li: a(href="#tab2", data-toggle="tab") Adresses
-      li: a(href="#tab3", data-toggle="tab") Notes
+      li: a(href="#documents", data-toggle="tab") Documents associés
+      li: a(href="#tab4", data-toggle="tab") Notes
     .tab-content
       #tab1.tab-pane.active
         .container-fluid
@@ -59,7 +60,9 @@ script#tableau-ordre-template(type="text/x-handlebars-template")
                         {{#option sexe value="3"}}s.o.{{/option}}
       #tab2.tab-pane
         h4 Adresses
-      #tab3.tab-pane
+      #documents.tab-pane
+        h4 Documents associés
+      #tab4.tab-pane
         h4 Notes
   .form-actions
     button.btn.btn-success(type="submit") Enregistrer

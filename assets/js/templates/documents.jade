@@ -1,0 +1,58 @@
+//- Copyright (C) 2012  CODE3 Cooperative de solidarite
+//- 
+//- This program is free software: you can redistribute it and/or modify
+//- it under the terms of the GNU General Public License as published by
+//- the Free Software Foundation, either version 3 of the License, or
+//- (at your option) any later version.
+//- 
+//- This program is distributed in the hope that it will be useful,
+//- but WITHOUT ANY WARRANTY; without even the implied warranty of
+//- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//- GNU General Public License for more details.
+//- 
+//- You should have received a copy of the GNU General Public License
+//- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+//-= require ../vendor/jade-runtime
+//-= require ../vendor/moment
+//-= require ../vendor/moment-fr
+//-= require ../vendor/underscore
+
+- moment.lang('fr')
+
+.container-fluid
+  .row-fluid
+    .span12
+      table.table.table-bordered.table-striped
+        thead: tr
+          th Titre
+          th Dernière modification
+          th Dernier contributeur
+          th Version
+          th État
+        tbody
+          - each doc in docs
+            - var lastModification, lastContributor, state, minorVersion, majorVersion;
+            - _.each(doc['cmisra:object']['cmis:properties']['cmis:propertyDateTime'], function (each) {
+            -   if (each['@']['localName'] === 'cmis:lastModificationDate')
+            -     lastModification = each['cmis:value']
+            - });
+            - _.each(doc['cmisra:object']['cmis:properties']['cmis:propertyString'], function (each) {
+            -   if (each['@']['localName'] === 'cmis:lastModifiedBy')
+            -     lastContributor = each['cmis:value']
+            -   if (each['@']['localName'] === 'nuxeo:lifecycleState')
+            -     state = each['cmis:value']
+            - });
+            - _.each(doc['cmisra:object']['cmis:properties']['cmis:propertyInteger'], function (each) {
+            -   if (each['@']['localName'] === 'minor_version')
+            -     minorVersion = each['cmis:value']
+            -   if (each['@']['localName'] === 'major_version')
+            -     majorVersion = each['cmis:value']
+            - });
+            tr
+              td: a(href="#{doc['atom:content']['@']['src']}")= doc['atom:title']
+              td= moment(lastModification).fromNow()
+              td= lastContributor
+              td #{majorVersion}.#{minorVersion}
+              td= state
+              
