@@ -14,16 +14,16 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 _ = require '../assets/js/vendor/underscore'
-http = require 'http'
+https = require 'https'
 xml2js = require 'xml2js'
 
 getDocumentLinks = (sio) ->
   options =
-    host: "europa.rlnx.com"
-    path: "/nuxeo/atom/cmis/default/children?id=88ae967b-65cc-4bde-af1a-9f7b63d67628"
+    host: "demo.rlnx.com"
+    path: "/nuxeooaq/atom/cmis/default/children?id=46121eff-ee1b-4cf9-a6a9-04890706bafc"
     auth: process.env['NUXEO_RLNX_CREDS']
     headers: { 'User-Agent': '' }
-  req = http.request options, (res) ->
+  req = https.request options, (res) ->
     chunks = []
     res.setEncoding 'utf8'
     res.on 'data', (chunk) -> chunks.push chunk
